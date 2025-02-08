@@ -32,17 +32,20 @@ public class Conta {
 	StringBuilder listar() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(String.format("------------------------"));
-		sb.append(String.format("Items\n"));
-		sb.append(String.format("------------------------"));
-		int index = 1;
+		sb.append("------------------------\n");
+		sb.append("Items\n");
+		sb.append("------------------------\n");
 
+		int index = 1;
 		for (ItemConta item : itens) {
 			sb.append(String.format("Index: %d - ", index));
 			sb.append(String.format("Descrição: %s - ", item.getItem().getDescricao()));
-			sb.append(String.format("Preço: %l%n", item.getItem().getPreco()));
+			sb.append(String.format("Preço: %.2f%n", item.getItem().getPreco()));
 			index++;
 		}
+
+		sb.append("------------------------\n");
+		sb.append(String.format("Total: %.2f\n", getTotal()));
 
 		return sb;
 	}

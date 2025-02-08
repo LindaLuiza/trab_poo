@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,9 @@ import dtos.TipoAcomodacaoDto;
 import exception.AcomodacaoException;
 import exception.TipoAcomodacaoException;
 
-public class AcomodacaoController {
+public class AcomodacaoController implements Serializable {
+
+	private static final long serialVersionUID = 1935946278254096531L;
 
 	private Map<String, TipoAcomodacao> tipos;
 	private Map<Integer, Acomodacao> acomodacoes;
@@ -28,7 +31,7 @@ public class AcomodacaoController {
 
 	public void createTipoAcomodacao(TipoAcomodacaoDto t) throws TipoAcomodacaoException {
 		if (tipos.containsKey(t.getName())) {
-			throw new TipoAcomodacaoException("já existe tipo comj o nome - " + t.getName());
+			throw new TipoAcomodacaoException("já existe tipo com o nome - " + t.getName());
 		}
 		TipoAcomodacao tipo = new TipoAcomodacao(t.getName(), t.getTarifaDiaria(), t.getAdicionalAcompanhante());
 		tipos.put(tipo.getName(), tipo);

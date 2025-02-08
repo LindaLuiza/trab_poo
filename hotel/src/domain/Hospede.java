@@ -1,5 +1,8 @@
 package domain;
 
+import exception.HospedeException;
+import util.CpfValidator;
+
 public class Hospede implements IHospede{
 
 	private final String cpf;
@@ -7,7 +10,10 @@ public class Hospede implements IHospede{
 	private String email;
 	private long telefone;
 
-	public Hospede(String cpf, String nome, String email, long telefone) {
+	public Hospede(String cpf, String nome, String email, long telefone) throws HospedeException{
+		if (!CpfValidator.validate(cpf)) {
+            throw new HospedeException("CPF inválido: " + cpf);
+        }
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;

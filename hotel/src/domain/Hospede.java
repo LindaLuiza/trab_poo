@@ -1,19 +1,23 @@
 package domain;
 
+import java.io.Serializable;
+
 import exception.HospedeException;
 import util.CpfValidator;
 
-public class Hospede implements IHospede{
+public class Hospede implements IHospede, Serializable {
+
+	private static final long serialVersionUID = 3254176286741034152L;
 
 	private final String cpf;
 	private String nome;
 	private String email;
 	private long telefone;
 
-	public Hospede(String cpf, String nome, String email, long telefone) throws HospedeException{
+	public Hospede(String cpf, String nome, String email, long telefone) throws HospedeException {
 		if (!CpfValidator.validate(cpf)) {
-            throw new HospedeException("CPF inválido: " + cpf);
-        }
+			throw new HospedeException("CPF inválido: " + cpf);
+		}
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;

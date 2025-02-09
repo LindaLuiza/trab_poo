@@ -6,7 +6,7 @@ import persistence.Serializer;
 
 // * Design Pattern Singleton 
 
-//TODO - Controllers: Acomodação, Hospede, Pagamento, Conta, Item, Hospede
+//TODO - Controllers: Pagamento, Conta, Item, Hospede
 
 public class MainController implements Serializable {
 
@@ -15,12 +15,14 @@ public class MainController implements Serializable {
 	private static MainController instance;
 
 	private AcomodacaoController acomodacaoController;
+	private HospedeController hospedeController;
 
 	// declarar os demais controladores
 
 	private MainController() {
 
 		acomodacaoController = new AcomodacaoController();
+		hospedeController = new HospedeController();
 
 		// instanciar os demais controladores
 
@@ -34,6 +36,10 @@ public class MainController implements Serializable {
 		return instance.acomodacaoController;
 	}
 
+	public static HospedeController getHospedeController() {
+		return instance.hospedeController;
+	}
+
 	// implementar metodos acessadores estaticos para os demais controladores
 
 	public static void load() {
@@ -42,6 +48,7 @@ public class MainController implements Serializable {
 
 		if (instance == null) {
 			instance = new MainController();
+			System.out.println(instance);
 		}
 	}
 

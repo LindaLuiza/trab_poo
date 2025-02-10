@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Categoria {
 
@@ -24,5 +25,9 @@ public class Categoria {
 	public void removeItem(Item i) {
 		return;
 	}
+	
+	public List<Item> getItens() {
+        return itens;
+    }
 	
 }

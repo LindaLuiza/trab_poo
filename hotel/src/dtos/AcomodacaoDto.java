@@ -4,8 +4,8 @@ import domain.EEstadoOcupacao;
 
 public class AcomodacaoDto {
 
-	private final int numero;
-	private final int ocupacaoMax;
+	private int numero;
+	private int ocupacaoMax;
 	private EEstadoOcupacao estadoOcupacao;
 	private String tipo;
 	private double tarifaDiaria;

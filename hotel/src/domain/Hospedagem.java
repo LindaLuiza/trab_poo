@@ -3,10 +3,10 @@ package domain;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 import exception.HospedagemException;
+import exception.PagamentoException;
 
 public class Hospedagem {
 
@@ -21,8 +21,7 @@ public class Hospedagem {
 	private ArrayList<Pagamento> pagamento;
 	private IConta conta;
 
-	public Hospedagem(Date checkout, IAcomodacao acomodacao, IHospede hospede, ArrayList<Pagamento> pagamento,
-			IConta conta) throws HospedagemException {
+	public Hospedagem(Acomodacao acomodacao, Hospede hospede) throws HospedagemException {
 
 		if (acomodacao.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL) {
 			throw new HospedagemException("A Acomodação selecionada não está disponível.");
@@ -43,8 +42,7 @@ public class Hospedagem {
 		this.acomodacao = acomodacao;
 		this.hospede = hospede;
 		this.acompanhantes = new ArrayList<IHospede>();
-		this.pagamento = pagamento;
-		this.conta = conta;
+		this.conta = (IConta) new Conta();
 
 		acomodacao.setEstadoOcupacao(EEstadoOcupacao.OCUPADO);
 	}
@@ -56,6 +54,15 @@ public class Hospedagem {
 		
 		this.acompanhantes.addAll(acompanhantes);
 	}
+	
+	public void addPagamento(Pagamento pagamento) throws PagamentoException {
+	    if (pagamento == null) {
+	        throw new PagamentoException("O pagamento não pode ser nulo.");
+	    }
+
+	    this.pagamento.add(pagamento);
+	}
+
 
 	public double calcularValorTotal() {
 		Duration duration = Duration.between(checkin, checkout);
@@ -78,6 +85,16 @@ public class Hospedagem {
 		if (agora.getHour() > limiteCheckout) {
 			throw new HospedagemException("O check-out deve ser feito até as 12h.");
 		}
+		
+		double valorTotal = calcularValorTotal();
+	    double totalPago = pagamento.stream().mapToDouble(Pagamento::getValor).sum();
+
+	    if (totalPago < valorTotal) {
+	        double saldoDevedor = valorTotal - totalPago;
+	        throw new HospedagemException(String.format("Pagamento insuficiente. Saldo devedor: R$ %.2f", saldoDevedor));
+	    }
+		
+		this.checkout = agora;
 
 		// Exibe a lista e o total da conta
 		StringBuilder sb = new StringBuilder();
@@ -85,19 +102,88 @@ public class Hospedagem {
 		sb.append(listar());
 		sb.append(String.format("Valor total das diárias: %.2f\n", calcularValorTotal()));
 
-		double saldoDevedor = calcularValorTotal();
-		double totalPago = pagamento.stream().mapToDouble(Pagamento::getValor).sum();
-
-		if (totalPago < saldoDevedor) {
-			sb.append(String.format("Pagamento pendente. Saldo devedor: %.2f\n", saldoDevedor - totalPago));
-		} else {
-			sb.append("Pagamento concluído.\n");
-		}
 
 		System.out.println(sb.toString());
 
 		acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);
-		acomodacao.setEstadoOcupacao(EEstadoOcupacao.DISPONIVEL);
+	}
+	
+	
+
+	public static int getInicioCheckin() {
+		return inicioCheckin;
+	}
+
+	public static void setInicioCheckin(int inicioCheckin) {
+		Hospedagem.inicioCheckin = inicioCheckin;
+	}
+
+	public static int getLimiteCheckout() {
+		return limiteCheckout;
+	}
+
+	public static void setLimiteCheckout(int limiteCheckout) {
+		Hospedagem.limiteCheckout = limiteCheckout;
+	}
+
+	public LocalDateTime getCheckin() {
+		return checkin;
+	}
+
+	public void setCheckin(LocalDateTime checkin) {
+		this.checkin = checkin;
+	}
+
+	public LocalDateTime getCheckout() {
+		return checkout;
+	}
+
+	public void setCheckout(LocalDateTime checkout) {
+		this.checkout = checkout;
+	}
+
+	public IAcomodacao getAcomodacao() {
+		return acomodacao;
+	}
+
+	public void setAcomodacao(IAcomodacao acomodacao) {
+		this.acomodacao = acomodacao;
+	}
+
+	public IHospede getHospede() {
+		return hospede;
+	}
+
+	public void setHospede(IHospede hospede) {
+		this.hospede = hospede;
+	}
+
+	public ArrayList<IHospede> getAcompanhantes() {
+		return acompanhantes;
+	}
+
+	public void setAcompanhantes(ArrayList<IHospede> acompanhantes) {
+		this.acompanhantes = acompanhantes;
+	}
+
+	public ArrayList<Pagamento> getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(ArrayList<Pagamento> pagamento) {
+		this.pagamento = pagamento;
+	}
+
+	public IConta getConta() {
+		return conta;
+	}
+
+	public void setConta(IConta conta) {
+		this.conta = conta;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public StringBuilder listar() {

@@ -33,7 +33,7 @@ public class HospedeController implements Serializable{
 	}
 	
 	
-	protected Hospede getHospede(String cpf) throws HospedeException {
+	public Hospede getHospede(String cpf) throws HospedeException {
 		Hospede h = hospedes.get(cpf);
 		if (h == null) {
 			throw new HospedeException("Não existe hospede cadastrado com este cpf " + cpf);

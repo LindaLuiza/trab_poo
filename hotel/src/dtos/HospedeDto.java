@@ -31,4 +31,9 @@ public class HospedeDto {
 		return telefone;
 	}
 
+	@Override
+	public String toString() {
+		return "HospedeDto [cpf=" + cpf + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + "]";
+	}
+
 }

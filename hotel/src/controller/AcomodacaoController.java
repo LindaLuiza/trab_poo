@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import domain.Acomodacao;
+import domain.EEstadoOcupacao;
 import domain.TipoAcomodacao;
 import dtos.AcomodacaoDto;
 import dtos.TipoAcomodacaoDto;
@@ -86,7 +87,7 @@ public class AcomodacaoController implements Serializable {
 
 	}
 
-	protected Acomodacao getAcomodacao(int numero) throws AcomodacaoException {
+	public Acomodacao getAcomodacao(int numero) throws AcomodacaoException {
 		Acomodacao acomodacao = acomodacoes.get(numero);
 		if (acomodacao == null) {
 			throw new AcomodacaoException("Não existe acomodação de numero " + numero);
@@ -110,8 +111,28 @@ public class AcomodacaoController implements Serializable {
 
 		return lista;
 	}
+	
+	public List<AcomodacaoDto> getAcomodacoesDisponiveis() {
+
+		List<AcomodacaoDto> lista = new ArrayList<>();
+
+		Set<Map.Entry<Integer, Acomodacao>> entries = acomodacoes.entrySet();
+
+		Acomodacao a;
+
+		for (Map.Entry<Integer, Acomodacao> e : entries) {
+			a = e.getValue();
+			if(a.getEstadoOcupacao() == EEstadoOcupacao.DISPONIVEL) {
+				lista.add(new AcomodacaoDto(a.getNumero(), a.getOcupacaoMax(), a.getEstadoOcupacao(), a.getTipo(),
+						a.getTarifaDiaria(), a.getAdicionalAcompanhante()));
+			}
+		}
+
+		return lista;
+	}
 
 	public Set<Integer> getKeysAcomodacoes() {
 		return acomodacoes.keySet();
 	}
+	
 }

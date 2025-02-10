@@ -13,7 +13,6 @@ public class MainHospedes {
 		try {
 			
 			hospedeController.createHospede(new HospedeDto("13006639790", "Linda", "linda@email.com", 999999999));
-			System.out.println("testeeeeee\n");
 		}
 		catch (HospedeException e) {
 			System.out.println(e.getMessage());

@@ -21,6 +21,7 @@ public class Main {
 					
 					//MainAcomodacoes.teste();
 					//MainHospedes.teste();
+					MainItens.teste();
 
 				} catch (Exception e) {
 					e.printStackTrace();

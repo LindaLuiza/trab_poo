@@ -2,7 +2,7 @@ package dtos;
 
 public class TipoAcomodacaoDto {
 
-	private final String name;
+	private String name;
 	private double tarifaDiaria;
 	private double adicionalAcompanhante;
 

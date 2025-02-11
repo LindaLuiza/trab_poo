@@ -33,12 +33,12 @@ public class MainHospedagens {
             HospedeDto hospede = new HospedeDto("12345678900", "João da Silva", "joao@gmail.com", 999999999);
             hospedeController.createHospede(hospede);
 
-            HospedagemDto hospedagemDto = new HospedagemDto("101", "12345678900");
+            HospedagemDto hospedagemDto = new HospedagemDto(acomodacao, hospede);
             hospedagemController.createHospedagem(hospedagemDto);
 
             System.out.println("Hospedagem criada com sucesso!");
 
-            String idHospedagem = hospedagemController.getHospedagens().keySet().iterator().next();  // Pega o primeiro ID
+            String idHospedagem = hospedagemController.getHospedagens().keySet().iterator().next();  
             double saldoDevedor = hospedagemController.getSaldoDevedor(idHospedagem);
             System.out.println("Saldo devedor inicial: R$ " + saldoDevedor);
 

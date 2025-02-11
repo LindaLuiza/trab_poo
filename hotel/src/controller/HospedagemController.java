@@ -21,7 +21,6 @@ public class HospedagemController implements Serializable {
 
 	public HospedagemController() {
 		hospedagens = new TreeMap<>();
-		;
 	}
 
 	public void createHospedagem(HospedagemDto h) throws HospedagemException, AcomodacaoException, HospedeException {
@@ -33,6 +32,10 @@ public class HospedagemController implements Serializable {
 		hospedagens.put(hospedagem.getId(), hospedagem);
 
 		MainController.save();
+	}
+	
+	public Object getHospedagens() {
+		return null;
 	}
 	
 	public void realizarCheckoutHospedagem(String idHospedagem) throws HospedagemException {

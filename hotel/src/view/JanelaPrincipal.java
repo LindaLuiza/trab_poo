@@ -25,15 +25,15 @@ public class JanelaPrincipal extends JFrame {
 		JPanel HospedagensContainer = new JPanel();
 		TabsContainer.addTab("Hospedagem", null, HospedagensContainer, null);
 		
-		JButton btnNewButton_1_1_1 = new JButton("Realizar CheckIn");
-		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+		JButton CheckIn = new JButton("Realizar Check In");
+		CheckIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 	                
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("Realizar CheckOut");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton CheckOut = new JButton(" Realizar Check Out   ");
+		CheckOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -41,108 +41,186 @@ public class JanelaPrincipal extends JFrame {
 		gl_HospedagensContainer.setHorizontalGroup(
 			gl_HospedagensContainer.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_HospedagensContainer.createSequentialGroup()
-					.addGap(120)
-					.addGroup(gl_HospedagensContainer.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnNewButton_1)
-						.addComponent(btnNewButton_1_1_1))
-					.addContainerGap(134, Short.MAX_VALUE))
+					.addGroup(gl_HospedagensContainer.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_HospedagensContainer.createSequentialGroup()
+							.addGap(143)
+							.addComponent(CheckIn))
+						.addGroup(gl_HospedagensContainer.createSequentialGroup()
+							.addGap(128)
+							.addComponent(CheckOut)))
+					.addContainerGap(144, Short.MAX_VALUE))
 		);
 		gl_HospedagensContainer.setVerticalGroup(
-			gl_HospedagensContainer.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_HospedagensContainer.createSequentialGroup()
-					.addContainerGap(31, Short.MAX_VALUE)
-					.addComponent(btnNewButton_1_1_1)
+			gl_HospedagensContainer.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_HospedagensContainer.createSequentialGroup()
+					.addGap(23)
+					.addComponent(CheckIn)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_1)
-					.addGap(18))
+					.addComponent(CheckOut)
+					.addContainerGap(61, Short.MAX_VALUE))
 		);
 		HospedagensContainer.setLayout(gl_HospedagensContainer);
 		
 		JPanel CadastrosContainer = new JPanel();
 		TabsContainer.addTab("Cadastros", null, CadastrosContainer, null);
 		
-		JPanel panel_1 = new JPanel();
-		CadastrosContainer.add(panel_1);
+		JPanel CadastrarBotoesContainer = new JPanel();
+		CadastrosContainer.add(CadastrarBotoesContainer);
 		
 		JButton CadastoHospede = new JButton("Cadastrar Hospede");
 		
-		JButton CadastroAcomodacao = new JButton("Cadastrar Acomodacao");
+		JButton CadastroAcomodacao = new JButton("Cadastrar Acomodação");
 		CadastroAcomodacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 		
-		JButton CadastrarTipoAcomodacao = new JButton("Cadastrar Tipo de Acomodacao");
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+		JButton CadastrarTipoAcomodacao = new JButton("Cadastrar Tipo de Acomodação");
+		
+		JButton CadastrarItem = new JButton("Cadastrar Item");
+		
+		JButton CadastrarCategoria = new JButton("Cadastrar Categoria");
+		GroupLayout gl_CadastrarBotoesContainer = new GroupLayout(CadastrarBotoesContainer);
+		gl_CadastrarBotoesContainer.setHorizontalGroup(
+			gl_CadastrarBotoesContainer.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_CadastrarBotoesContainer.createSequentialGroup()
 					.addContainerGap(125, Short.MAX_VALUE)
 					.addComponent(CadastoHospede)
 					.addGap(139))
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(108)
+				.addGroup(Alignment.LEADING, gl_CadastrarBotoesContainer.createSequentialGroup()
+					.addGap(110)
 					.addComponent(CadastroAcomodacao)
-					.addContainerGap(130, Short.MAX_VALUE))
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(74)
+					.addContainerGap(128, Short.MAX_VALUE))
+				.addGroup(Alignment.LEADING, gl_CadastrarBotoesContainer.createSequentialGroup()
+					.addGap(84)
 					.addComponent(CadastrarTipoAcomodacao)
-					.addContainerGap(108, Short.MAX_VALUE))
+					.addContainerGap(98, Short.MAX_VALUE))
+				.addGroup(Alignment.LEADING, gl_CadastrarBotoesContainer.createSequentialGroup()
+					.addGap(111)
+					.addGroup(gl_CadastrarBotoesContainer.createParallelGroup(Alignment.LEADING)
+						.addComponent(CadastrarCategoria, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
+						.addComponent(CadastrarItem, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(127, Short.MAX_VALUE))
 		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
+		gl_CadastrarBotoesContainer.setVerticalGroup(
+			gl_CadastrarBotoesContainer.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_CadastrarBotoesContainer.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(CadastoHospede)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(CadastroAcomodacao)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(CadastoHospede)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(CadastrarTipoAcomodacao)
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(CadastrarItem)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(CadastrarCategoria))
 		);
-		panel_1.setLayout(gl_panel_1);
+		CadastrarBotoesContainer.setLayout(gl_CadastrarBotoesContainer);
 		
 		JPanel ListagemContainer = new JPanel();
 		TabsContainer.addTab("Listagem", null, ListagemContainer, null);
 		
-		JPanel panel_1_1 = new JPanel();
-		ListagemContainer.add(panel_1_1);
+		JPanel ListarBotoesContainer = new JPanel();
+		ListagemContainer.add(ListarBotoesContainer);
 		
-		JButton btnListarHospede = new JButton("Listar Hospede");
+		JButton ListarHospede = new JButton("Listar Hospedes");
 		
-		JButton btnNewButton_1_1_2 = new JButton("Listar Acomodacao");
+		JButton ListarAcomodacao = new JButton("Listar Acomodações");
 		
-		JButton btnNewButton_1_2_1 = new JButton("Listar Tipo de Acomodacao");
-		btnNewButton_1_2_1.addActionListener(new ActionListener() {
+		JButton ListarTipoAcomodacao = new JButton("Listar Tipos de Acomodação");
+		ListarTipoAcomodacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		GroupLayout gl_panel_1_1 = new GroupLayout(panel_1_1);
-		gl_panel_1_1.setHorizontalGroup(
-			gl_panel_1_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1_1.createSequentialGroup()
-					.addContainerGap(129, Short.MAX_VALUE)
-					.addGroup(gl_panel_1_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1_1.createSequentialGroup()
+		
+		JButton ListarItens = new JButton("Listar Itens");
+		ListarItens.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		JButton ListarCategorias = new JButton("Listar Categorias");
+		GroupLayout gl_ListarBotoesContainer = new GroupLayout(ListarBotoesContainer);
+		gl_ListarBotoesContainer.setHorizontalGroup(
+			gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+					.addContainerGap(141, Short.MAX_VALUE)
+					.addComponent(ListarHospede)
+					.addGap(153))
+				.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+					.addGap(124)
+					.addComponent(ListarAcomodacao)
+					.addContainerGap(144, Short.MAX_VALUE))
+				.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+					.addGap(99)
+					.addComponent(ListarTipoAcomodacao)
+					.addContainerGap(113, Short.MAX_VALUE))
+				.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+					.addGap(162)
+					.addComponent(ListarItens)
+					.addContainerGap(167, Short.MAX_VALUE))
+				.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+					.addGap(131)
+					.addComponent(ListarCategorias)
+					.addContainerGap(156, Short.MAX_VALUE))
+		);
+		gl_ListarBotoesContainer.setVerticalGroup(
+			gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(ListarHospede)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(ListarAcomodacao)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(ListarTipoAcomodacao)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(ListarItens)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(ListarCategorias))
+		);
+		ListarBotoesContainer.setLayout(gl_ListarBotoesContainer);
+		
+		JPanel PagamentosContainer = new JPanel();
+		TabsContainer.addTab("Pagamentos", null, PagamentosContainer, null);
+		
+		JPanel ProcessarPagamento = new JPanel();
+		PagamentosContainer.add(ProcessarPagamento);
+		
+		JButton CriarPagamento = new JButton("Adicionar Pagamento");
+		
+		JButton ConsultarSaldoDevedor = new JButton("Consultar Saldo Devedor");
+		
+		JButton ConsultarValorTotal = new JButton("Consultar Valor Total");
+		GroupLayout gl_ProcessarPagamento = new GroupLayout(ProcessarPagamento);
+		gl_ProcessarPagamento.setHorizontalGroup(
+			gl_ProcessarPagamento.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 436, Short.MAX_VALUE)
+				.addGroup(gl_ProcessarPagamento.createSequentialGroup()
+					.addContainerGap(141, Short.MAX_VALUE)
+					.addComponent(CriarPagamento)
+					.addGap(153))
+				.addGroup(gl_ProcessarPagamento.createSequentialGroup()
+					.addGap(124)
+					.addGroup(gl_ProcessarPagamento.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_ProcessarPagamento.createSequentialGroup()
 							.addGap(12)
-							.addComponent(btnListarHospede))
-						.addComponent(btnNewButton_1_1_2))
-					.addGap(139))
-				.addGroup(Alignment.LEADING, gl_panel_1_1.createSequentialGroup()
-					.addGap(102)
-					.addComponent(btnNewButton_1_2_1)
-					.addContainerGap(110, Short.MAX_VALUE))
+							.addComponent(ConsultarValorTotal))
+						.addComponent(ConsultarSaldoDevedor))
+					.addContainerGap(145, Short.MAX_VALUE))
 		);
-		gl_panel_1_1.setVerticalGroup(
-			gl_panel_1_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1_1.createSequentialGroup()
-					.addComponent(btnNewButton_1_1_2)
+		gl_ProcessarPagamento.setVerticalGroup(
+			gl_ProcessarPagamento.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_ProcessarPagamento.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(CriarPagamento)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnListarHospede)
+					.addComponent(ConsultarSaldoDevedor)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_1_2_1)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(ConsultarValorTotal)
+					.addContainerGap(31, Short.MAX_VALUE))
 		);
-		panel_1_1.setLayout(gl_panel_1_1);
+		ProcessarPagamento.setLayout(gl_ProcessarPagamento);
 		CadastoHospede.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CriarHospede hospedeWindow = new CriarHospede();

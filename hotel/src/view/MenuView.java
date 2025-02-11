@@ -145,10 +145,18 @@ public class MenuView extends JFrame {
 		JButton ListarItens = new JButton("Listar Itens");
 		ListarItens.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				 ListarItens listarItens = new ListarItens();  // Abre a janela de listagem de itens
+			     listarItens.setVisible(true);
 			}
 		});
 
 		JButton ListarCategorias = new JButton("Listar Categorias");
+		ListarCategorias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarCategoria listarCategorias = new ListarCategoria();  // Abre a janela de listagem de categorias
+		        listarCategorias.setVisible(true);
+			}
+		});
 		GroupLayout gl_ListarBotoesContainer = new GroupLayout(ListarBotoesContainer);
 		gl_ListarBotoesContainer.setHorizontalGroup(gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_ListarBotoesContainer.createSequentialGroup().addContainerGap(141, Short.MAX_VALUE)

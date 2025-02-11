@@ -1,10 +1,14 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Categoria {
+import exception.ItemException;
 
+public class Categoria implements Serializable{
+
+	private static final long serialVersionUID = -8621154512992843110L;
 	private final String nome;
 	private ArrayList<Item> itens;
 
@@ -17,9 +21,16 @@ public class Categoria {
 		return nome;
 	}
 
-	public void addItem(Item i) {
-		itens.add(i);
+	public void addItem(Item item) throws ItemException {
+	    boolean itemJaExiste = itens.stream().anyMatch(i -> i.getCodigo() == item.getCodigo());
+
+	    if (itemJaExiste) {
+	        throw new ItemException("Item já está na categoria");
+	    } else {
+	        itens.add(item);
+	    }
 	}
+
 	
 	//TODO: Remove itens
 	public void removeItem(Item i) {

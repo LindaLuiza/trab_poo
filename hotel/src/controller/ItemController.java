@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,8 +12,10 @@ import dtos.CategoriaDto;
 import dtos.ItemDto;
 import exception.ItemException;
 
-public class ItemController {
+public class ItemController implements Serializable{
 
+	private static final long serialVersionUID = -333031781349286041L;
+	
 	private List<Item> itemList = new ArrayList<>();
 	private List<Categoria> categoriaList = new ArrayList<>();
 

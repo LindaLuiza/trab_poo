@@ -75,6 +75,8 @@ public class MenuView extends JFrame {
 		JButton CadastroAcomodacao = new JButton("Cadastrar Acomodação");
 		CadastroAcomodacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				CriarAcomodacao acomodacaoWindow = new CriarAcomodacao();
+				acomodacaoWindow.setVisible(true);
 			}
 		});
 

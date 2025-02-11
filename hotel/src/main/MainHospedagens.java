@@ -26,7 +26,7 @@ public class MainHospedagens {
             HospedagemController hospedagemController = MainController.getHospedagemController();
 
             TipoAcomodacaoDto tipoAcomodacao = new TipoAcomodacaoDto("Suite Luxo", 2, 300.0);
-            AcomodacaoDto acomodacao = new AcomodacaoDto(101, 2, "Suite Luxo");
+            AcomodacaoDto acomodacao = new AcomodacaoDto(101, 2, tipoAcomodacao);
 
             acomodacaoController.createAcomodacao(acomodacao);
 

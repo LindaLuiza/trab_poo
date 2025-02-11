@@ -19,9 +19,9 @@ public class Main {
 					MenuView frame = new MenuView();
 					frame.setVisible(true);
 					
-					MainAcomodacoes.teste();
-					MainHospedes.teste();
-					MainItens.teste();
+					//MainAcomodacoes.teste();
+					//MainHospedes.teste();
+					//MainItens.teste();
 
 				} catch (Exception e) {
 					e.printStackTrace();

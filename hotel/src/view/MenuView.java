@@ -89,8 +89,20 @@ public class MenuView extends JFrame {
 		});
 
 		JButton CadastrarItem = new JButton("Cadastrar Item");
+		CadastrarItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CriarItem itemWindow = new CriarItem();
+				itemWindow.setVisible(true);
+			}
+		});
 
 		JButton CadastrarCategoria = new JButton("Cadastrar Categoria");
+		CadastrarCategoria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CriarCategoria categoriaWindow = new CriarCategoria();
+				categoriaWindow.setVisible(true);
+			}
+		});
 		GroupLayout gl_CadastrarBotoesContainer = new GroupLayout(CadastrarBotoesContainer);
 		gl_CadastrarBotoesContainer.setHorizontalGroup(gl_CadastrarBotoesContainer
 				.createParallelGroup(Alignment.TRAILING)

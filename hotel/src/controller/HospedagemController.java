@@ -1,8 +1,10 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import domain.Hospedagem;
@@ -34,8 +36,20 @@ public class HospedagemController implements Serializable {
 		MainController.save();
 	}
 	
-	public Object getHospedagens() {
-		return null;
+	public Set<String> getKeysHospedagens() {
+		return hospedagens.keySet();
+	}
+	
+	public List<HospedagemDto> getHospedagens() {
+	    List<HospedagemDto> lista = new ArrayList<>();
+	    Set<Map.Entry<String, Hospedagem>> entries = hospedagens.entrySet();
+
+	    for (Map.Entry<String, Hospedagem> entry : entries) {
+	        Hospedagem h = entry.getValue();
+	        lista.add(new HospedagemDto(h.getId(), h.getNumeroAcomodacao(), h.getCpfHospede(), h.getDataCheckin(), h.getDataCheckout()));
+	    }
+
+	    return lista;
 	}
 	
 	public void realizarCheckoutHospedagem(String idHospedagem) throws HospedagemException {

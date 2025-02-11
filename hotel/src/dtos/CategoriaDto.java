@@ -5,9 +5,13 @@ import java.util.List;
 public class CategoriaDto {
     private String nome;
     private List<ItemDto> itens;
+    
+    public CategoriaDto(String nome) {
+        this.nome = nome;
+    }
 
     public CategoriaDto(String nome, List<ItemDto> itens) {
-        this.nome = nome;
+        this(nome);
         this.itens = itens;
     }
 

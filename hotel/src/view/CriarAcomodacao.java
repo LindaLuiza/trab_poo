@@ -105,7 +105,6 @@ public class CriarAcomodacao extends JFrame {
 		TipoAcomodacao.add(TipoAcomcomboBox);
 		carregarTiposAcomodacao(TipoAcomcomboBox);
 		
-		// Adicionando ActionListener ao JComboBox para capturar o tipo selecionado
 		TipoAcomcomboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -116,7 +115,7 @@ public class CriarAcomodacao extends JFrame {
 		panel.setLayout(gl_panel);
 		ContentPanel.setLayout(gl_contentPanel);
 
-		setTitle("Criar Acomodação");
+		setTitle("Criar Item");
 		setSize(425, 260);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

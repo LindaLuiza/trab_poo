@@ -3,7 +3,7 @@ package main;
 import java.awt.EventQueue;
 
 import controller.MainController;
-// import view.MenuView;
+import view.MenuView;
 
 public class Main {
 
@@ -16,12 +16,12 @@ public class Main {
 				try {
 					MainController.load();
 
-					// MenuView frame = new MenuView();
-					// frame.setVisible(true);
+					MenuView frame = new MenuView();
+					frame.setVisible(true);
 					
 					//MainAcomodacoes.teste();
 					//MainHospedes.teste();
-					MainItens.teste();
+					//MainItens.teste();
 
 				} catch (Exception e) {
 					e.printStackTrace();

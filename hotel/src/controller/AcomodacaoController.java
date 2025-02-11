@@ -135,9 +135,4 @@ public class AcomodacaoController implements Serializable {
 		return acomodacoes.keySet();
 	}
 	
-
-	public static String retornarOi() {
-	        return "Oi";
-	}	   
-	
 }

@@ -127,6 +127,12 @@ public class MenuView extends JFrame {
 		JButton ListarHospede = new JButton("Listar Hospedes");
 
 		JButton ListarAcomodacao = new JButton("Listar Acomodações");
+		ListarAcomodacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarAcomodacoes listarAcomodacoes = new ListarAcomodacoes();
+		        listarAcomodacoes.setVisible(true);
+			}
+		});
 
 		JButton ListarTipoAcomodacao = new JButton("Listar Tipos de Acomodação");
 		ListarTipoAcomodacao.addActionListener(new ActionListener() {

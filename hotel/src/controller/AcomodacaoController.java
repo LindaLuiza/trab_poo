@@ -133,6 +133,6 @@ public class AcomodacaoController implements Serializable {
 
 	public Set<Integer> getKeysAcomodacoes() {
 		return acomodacoes.keySet();
-	}
+	}	
 	
 }

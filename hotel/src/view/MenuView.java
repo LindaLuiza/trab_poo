@@ -137,6 +137,8 @@ public class MenuView extends JFrame {
 		JButton ListarTipoAcomodacao = new JButton("Listar Tipos de Acomodação");
 		ListarTipoAcomodacao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ListarTipoAcomodacao listarTipoAcomodacao = new ListarTipoAcomodacao();
+		        listarTipoAcomodacao.setVisible(true);
 			}
 		});
 

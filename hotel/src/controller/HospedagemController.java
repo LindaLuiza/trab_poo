@@ -48,7 +48,7 @@ public class HospedagemController implements Serializable {
 
 		for (Map.Entry<String, Hospedagem> entry : entries) {
 			Hospedagem h = entry.getValue();
-			lista.add(new HospedagemDto(
+			lista.add(new HospedagemDto(h.getId(), h.getCheckin(), h.getCheckout(),
 					new AcomodacaoDto(h.getNumeroAcomodacao(), h.getOcupacaoMaxAcomodacao(), h.getTipoAcomodacao()),
 					new HospedeDto(h.getCpfHospede(), h.getNomeHospede(), h.getEmailHospede(), h.getTelephoneHospede())));
 		}

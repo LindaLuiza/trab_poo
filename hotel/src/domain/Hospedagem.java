@@ -1,5 +1,6 @@
 package domain;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,8 +9,10 @@ import java.util.UUID;
 import exception.HospedagemException;
 import exception.PagamentoException;
 
-public class Hospedagem {
+public class Hospedagem implements Serializable{
 
+	private static final long serialVersionUID = -6398699107241630479L;
+	
 	private static int inicioCheckin = 13;
 	private static int limiteCheckout = 12;
 	private final String id;
@@ -19,7 +22,7 @@ public class Hospedagem {
 	private IHospede hospede;
 	private ArrayList<IHospede> acompanhantes;
 	private ArrayList<Pagamento> pagamento;
-	//private IConta conta;
+	private Conta conta;
 
 	public Hospedagem(Acomodacao acomodacao, Hospede hospede) throws HospedagemException {
 
@@ -39,12 +42,13 @@ public class Hospedagem {
 		}
 
 		id = UUID.randomUUID().toString();
+		//System.out.println("ID: " + id);
 		this.checkin = agora;
 		//this.checkout = checkout.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
 		this.acomodacao = acomodacao;
 		this.hospede = hospede;
 		this.acompanhantes = new ArrayList<IHospede>();
-		//this.conta = (IConta) new Conta();
+		this.conta = new Conta();
 
 		acomodacao.setEstadoOcupacao(EEstadoOcupacao.OCUPADO);
 	}

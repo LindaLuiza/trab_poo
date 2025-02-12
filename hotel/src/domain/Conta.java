@@ -1,9 +1,12 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Conta {
+public class Conta implements Serializable{
 
+	private static final long serialVersionUID = 5517716049946906098L;
+	
 	private ArrayList<ItemConta> itens;
 
 	public Conta() {

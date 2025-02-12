@@ -17,7 +17,7 @@ public class HospedagemDto {
 	}
 
 	public HospedagemDto(String id, LocalDateTime checkin, LocalDateTime checkout, AcomodacaoDto acomodacao,
-			HospedeDto hospede, ContaDto conta) {
+			HospedeDto hospede) {
 		this.id = id;
 		this.checkin = checkin;
 		this.checkout = checkout;

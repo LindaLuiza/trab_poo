@@ -16,12 +16,12 @@ public class Main {
 				try {
 					MainController.load();
 
-					//MenuView frame = new MenuView();
-					//frame.setVisible(true);
+					MenuView frame = new MenuView();
+					frame.setVisible(true);
 					
 					MainAcomodacoes.teste();
-					//MainHospedes.teste();
-					//MainItens.teste();
+					MainHospedes.teste();
+					MainItens.teste();
 					MainHospedagens.teste();
 
 				} catch (Exception e) {

@@ -25,6 +25,6 @@ public class ItemDto {
 
 	@Override
 	public String toString() {
-		return "ItemDto{codigo=" + codigo + ", descricao='" + descricao + "', preco=" + preco + "}";
+		return "codigo=" + codigo + ", descricao='" + descricao + "', preco=" + preco + "";
 	}
 }

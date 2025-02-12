@@ -19,13 +19,15 @@ public class Hospedagem {
 	private IHospede hospede;
 	private ArrayList<IHospede> acompanhantes;
 	private ArrayList<Pagamento> pagamento;
-	private IConta conta;
+	//private IConta conta;
 
 	public Hospedagem(Acomodacao acomodacao, Hospede hospede) throws HospedagemException {
 
 		if (acomodacao.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL) {
 			throw new HospedagemException("A Acomodação selecionada não está disponível.");
 		}
+		
+		this.acompanhantes = new ArrayList<IHospede>();
 		
 		if (acompanhantes.size() + 1 > acomodacao.getOcupacaoMax()) { 
             throw new HospedagemException("Número de hóspedes excede a capacidade máxima da acomodação.");
@@ -42,7 +44,7 @@ public class Hospedagem {
 		this.acomodacao = acomodacao;
 		this.hospede = hospede;
 		this.acompanhantes = new ArrayList<IHospede>();
-		this.conta = (IConta) new Conta();
+		//this.conta = (IConta) new Conta();
 
 		acomodacao.setEstadoOcupacao(EEstadoOcupacao.OCUPADO);
 	}
@@ -173,7 +175,7 @@ public class Hospedagem {
 	public void setPagamento(ArrayList<Pagamento> pagamento) {
 		this.pagamento = pagamento;
 	}
-
+/*
 	public IConta getConta() {
 		return conta;
 	}
@@ -181,11 +183,39 @@ public class Hospedagem {
 	public void setConta(IConta conta) {
 		this.conta = conta;
 	}
-
+*/
 	public String getId() {
 		return id;
 	}
+	
+	public int getNumeroAcomodacao() {
+		return acomodacao.getNumero();
+	}
+	
+	public int getOcupacaoMaxAcomodacao() {
+		return acomodacao.getOcupacaoMax();
+	}
 
+	public String getTipoAcomodacao() {
+		return acomodacao.getTipo();
+	}
+	
+	public String getCpfHospede() {
+		return hospede.getCpf();
+	}
+	
+	public String getNomeHospede() {
+		return hospede.getNome();
+	}
+	
+	public String getEmailHospede() {
+		return hospede.getEmail();
+	}
+	
+	public long getTelephoneHospede() {
+		return hospede.getTelefone();
+	}
+	
 	public StringBuilder listar() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(String.format("ID: %s%n", id));

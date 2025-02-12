@@ -9,7 +9,9 @@ import java.util.TreeMap;
 
 import domain.Hospedagem;
 import domain.Pagamento;
+import dtos.AcomodacaoDto;
 import dtos.HospedagemDto;
+import dtos.HospedeDto;
 import exception.AcomodacaoException;
 import exception.HospedagemException;
 import exception.HospedeException;
@@ -35,63 +37,64 @@ public class HospedagemController implements Serializable {
 
 		MainController.save();
 	}
-	
+
 	public Set<String> getKeysHospedagens() {
 		return hospedagens.keySet();
 	}
-	
+
 	public List<HospedagemDto> getHospedagens() {
-	    List<HospedagemDto> lista = new ArrayList<>();
-	    Set<Map.Entry<String, Hospedagem>> entries = hospedagens.entrySet();
+		List<HospedagemDto> lista = new ArrayList<>();
+		Set<Map.Entry<String, Hospedagem>> entries = hospedagens.entrySet();
 
-	    for (Map.Entry<String, Hospedagem> entry : entries) {
-	        Hospedagem h = entry.getValue();
-	        lista.add(new HospedagemDto(h.getId(), h.getNumeroAcomodacao(), h.getCpfHospede(), h.getDataCheckin(), h.getDataCheckout()));
-	    }
+		for (Map.Entry<String, Hospedagem> entry : entries) {
+			Hospedagem h = entry.getValue();
+			lista.add(new HospedagemDto(
+					new AcomodacaoDto(h.getNumeroAcomodacao(), h.getOcupacaoMaxAcomodacao(), h.getTipoAcomodacao()),
+					new HospedeDto(h.getCpfHospede(), h.getNomeHospede(), h.getEmailHospede(), h.getTelephoneHospede())));
+		}
 
-	    return lista;
+		return lista;
 	}
-	
-	public void realizarCheckoutHospedagem(String idHospedagem) throws HospedagemException {
-	    Hospedagem hospedagem = hospedagens.get(idHospedagem);
-	    if (hospedagem == null) {
-	        throw new HospedagemException("Hospedagem com ID " + idHospedagem + " não encontrada.");
-	    }
 
-	    try {
-	        hospedagem.realizarCheckout();
-	        System.out.println("Checkout finalizado para a hospedagem ID: " + idHospedagem);
-	        MainController.save();
-	    } catch (HospedagemException e) {
-	        throw new HospedagemException("Erro ao realizar o checkout: " + e.getMessage());
-	    }
+	public void realizarCheckoutHospedagem(String idHospedagem) throws HospedagemException {
+		Hospedagem hospedagem = hospedagens.get(idHospedagem);
+		if (hospedagem == null) {
+			throw new HospedagemException("Hospedagem com ID " + idHospedagem + " não encontrada.");
+		}
+
+		try {
+			hospedagem.realizarCheckout();
+			System.out.println("Checkout finalizado para a hospedagem ID: " + idHospedagem);
+			MainController.save();
+		} catch (HospedagemException e) {
+			throw new HospedagemException("Erro ao realizar o checkout: " + e.getMessage());
+		}
 	}
 
 	public double getSaldoDevedor(String idHospedagem) throws HospedagemException {
-        Hospedagem hospedagem = getHospedagemById(idHospedagem);
-        double valorTotal = hospedagem.calcularValorTotal();
-        double totalPago = hospedagem.getPagamento().stream().mapToDouble(Pagamento::getValor).sum();
-        return Math.max(0, valorTotal - totalPago);
-    }
-	
+		Hospedagem hospedagem = getHospedagemById(idHospedagem);
+		double valorTotal = hospedagem.calcularValorTotal();
+		double totalPago = hospedagem.getPagamento().stream().mapToDouble(Pagamento::getValor).sum();
+		return Math.max(0, valorTotal - totalPago);
+	}
+
 	public void addPagamento(String idHospedagem, Pagamento pagamento) throws HospedagemException, PagamentoException {
-        Hospedagem hospedagem = getHospedagemById(idHospedagem);
-        hospedagem.addPagamento(pagamento);
-        MainController.save();
-    }
+		Hospedagem hospedagem = getHospedagemById(idHospedagem);
+		hospedagem.addPagamento(pagamento);
+		MainController.save();
+	}
 
-    public List<Pagamento> getPagamentos(String idHospedagem) throws HospedagemException {
-        Hospedagem hospedagem = getHospedagemById(idHospedagem);
-        return hospedagem.getPagamento();
-    }
+	public List<Pagamento> getPagamentos(String idHospedagem) throws HospedagemException {
+		Hospedagem hospedagem = getHospedagemById(idHospedagem);
+		return hospedagem.getPagamento();
+	}
 
-    public Hospedagem getHospedagemById(String idHospedagem) throws HospedagemException {
-        Hospedagem hospedagem = hospedagens.get(idHospedagem);
-        if (hospedagem == null) {
-            throw new HospedagemException("Hospedagem com ID " + idHospedagem + " não encontrada.");
-        }
-        return hospedagem;
-    }
-
+	public Hospedagem getHospedagemById(String idHospedagem) throws HospedagemException {
+		Hospedagem hospedagem = hospedagens.get(idHospedagem);
+		if (hospedagem == null) {
+			throw new HospedagemException("Hospedagem com ID " + idHospedagem + " não encontrada.");
+		}
+		return hospedagem;
+	}
 
 }

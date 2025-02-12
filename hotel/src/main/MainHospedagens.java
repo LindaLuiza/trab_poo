@@ -1,6 +1,7 @@
 package main;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import controller.AcomodacaoController;
 import controller.HospedagemController;
@@ -16,6 +17,7 @@ import exception.AcomodacaoException;
 import exception.HospedagemException;
 import exception.HospedeException;
 import exception.PagamentoException;
+import exception.TipoAcomodacaoException;
 
 public class MainHospedagens {
 
@@ -25,12 +27,12 @@ public class MainHospedagens {
             HospedeController hospedeController = MainController.getHospedeController();
             HospedagemController hospedagemController = MainController.getHospedagemController();
 
-            TipoAcomodacaoDto tipoAcomodacao = new TipoAcomodacaoDto("Suite Luxo", 2, 300.0);
-            AcomodacaoDto acomodacao = new AcomodacaoDto(101, 2, tipoAcomodacao.getName());
+            TipoAcomodacaoDto tipoAcomodacao = new TipoAcomodacaoDto("Suite Master", 2, 300.0);
+            AcomodacaoDto acomodacao = new AcomodacaoDto(111, 2, tipoAcomodacao.getName());
 
             acomodacaoController.createAcomodacao(acomodacao);
 
-            HospedeDto hospede = new HospedeDto("12345678900", "João da Silva", "joao@gmail.com", 999999999);
+            HospedeDto hospede = new HospedeDto("18119185730", "Lewis", "lewis@gmail.com", 999999999);
             hospedeController.createHospede(hospede);
 
             HospedagemDto hospedagemDto = new HospedagemDto(acomodacao, hospede);
@@ -38,25 +40,13 @@ public class MainHospedagens {
 
             System.out.println("Hospedagem criada com sucesso!");
 
-            String idHospedagem = hospedagemController.getHospedagens(); 
-            double saldoDevedor = hospedagemController.getSaldoDevedor(idHospedagem);
-            System.out.println("Saldo devedor inicial: R$ " + saldoDevedor);
+            List<HospedagemDto> idHospedagem = hospedagemController.getHospedagens(); 
+            
+            for (HospedagemDto i : idHospedagem) {
+    			System.out.println(i);
+    		}
 
-            Pagamento pagamento1 = new Pagamento(ETipoPagamento.DEBITO, 200.00);
-            hospedagemController.addPagamento(idHospedagem, pagamento1);
-            System.out.println("Pagamento de R$ 200,00 registrado.");
-
-            saldoDevedor = hospedagemController.getSaldoDevedor(idHospedagem);
-            System.out.println("Saldo devedor após pagamento: R$ " + saldoDevedor);
-
-            Pagamento pagamento2 = new Pagamento(ETipoPagamento.CREDITO, saldoDevedor);
-            hospedagemController.addPagamento(idHospedagem, pagamento2);
-            System.out.println("Pagamento do saldo restante registrado.");
-
-            hospedagemController.getHospedagemById(idHospedagem).realizarCheckout();
-            System.out.println("Checkout realizado com sucesso!");
-
-        } catch (AcomodacaoException | HospedeException | HospedagemException | PagamentoException e) {
+        } catch (TipoAcomodacaoException | AcomodacaoException | HospedeException | HospedagemException  e) {
             System.err.println("Erro: " + e.getMessage());
         }
     }

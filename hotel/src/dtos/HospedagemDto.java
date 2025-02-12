@@ -57,5 +57,5 @@ public class HospedagemDto {
 	/*
 	 * public String getConta() { return conta; }
 	 */
-
+	
 }

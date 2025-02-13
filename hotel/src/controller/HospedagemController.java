@@ -134,6 +134,7 @@ public class HospedagemController implements Serializable {
 		Conta conta = hospedagem.getConta();
 		
 		conta.addItem(itemConta, qtde);
+		MainController.save();
 
 	}
 	
@@ -184,6 +185,8 @@ public class HospedagemController implements Serializable {
 	    } catch (HospedeException e) {
 			System.out.println("Hoapede Exception" + e);
 		}
+	    MainController.save();
 	}
+	
 
 }

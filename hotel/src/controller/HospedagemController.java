@@ -135,5 +135,41 @@ public class HospedagemController implements Serializable {
 		conta.addItem(itemConta, qtde);
 
 	}
+	
+	public void listarItensConta(String idHospedagem) {
+	    Hospedagem hospedagem = null;
+
+	    try {
+	        hospedagem = getHospedagemById(idHospedagem);
+	    } catch (HospedagemException e) {
+	        System.out.println("Erro: Hospedagem não encontrada. " + e.getMessage());
+	        return;
+	    }
+
+	    Conta conta = hospedagem.getConta();
+
+	    if (conta.getItens().isEmpty()) {
+	        System.out.println("A conta não possui itens registrados.");
+	        return;
+	    }
+
+	    System.out.println("Itens da Conta da Hospedagem:");
+	    double totalConta = 0;
+
+	    for (ItemConta itemConta : conta.getItens()) {
+	        double totalItem = itemConta.getQtde() * itemConta.getItem().getPreco();
+	        totalConta += totalItem;
+	        
+	        System.out.printf("  - Código: %d | Descrição: %s | Quantidade: %d | Preço Unitário: R$ %.2f | Total: R$ %.2f%n",
+	            itemConta.getItem().getCodigo(),
+	            itemConta.getItem().getDescricao(),
+	            itemConta.getQtde(),
+	            itemConta.getItem().getPreco(),
+	            totalItem
+	        );
+	    }
+
+	    System.out.printf("Total da Conta: R$ %.2f%n", totalConta);
+	}
 
 }

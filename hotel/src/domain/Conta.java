@@ -23,6 +23,14 @@ public class Conta implements Serializable{
 		itens.remove(index);
 	}
 
+	public ArrayList<ItemConta> getItens() {
+		return itens;
+	}
+
+	public void setItens(ArrayList<ItemConta> itens) {
+		this.itens = itens;
+	}
+
 	public double getTotal() {
 		// precoTotal = precoTotal + item.getTotal();
 		double precoTotal = 0.0;

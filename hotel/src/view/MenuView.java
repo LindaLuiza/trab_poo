@@ -233,7 +233,7 @@ public class MenuView extends JFrame {
 		JButton btnListarAcompanhantes = new JButton("Listar Acompanhantes");
 		btnListarAcompanhantes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListarAcompanhantes listarAcompanhantes = new ListarAcompanhantes(HospedagemId);
+				ListarAcompanhantes listarAcompanhantes = new ListarAcompanhantes();
 				listarAcompanhantes.setVisible(true);
 			}
 		});

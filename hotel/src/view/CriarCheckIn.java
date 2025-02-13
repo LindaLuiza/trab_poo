@@ -32,9 +32,6 @@ public class CriarCheckIn extends JFrame {
     private JTextField txtNumeroAcomodacao;
     private JTextField txtCpfHospede;
 
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -48,9 +45,6 @@ public class CriarCheckIn extends JFrame {
         });
     }
 
-    /**
-     * Create the frame.
-     */
     public CriarCheckIn() {
     	MainController.load();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,7 +55,7 @@ public class CriarCheckIn extends JFrame {
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         setContentPane(contentPane);
 
-        // Usar GridBagLayout para um layout responsivo
+   
         GridBagLayout gbl_contentPane = new GridBagLayout();
         gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
         gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0 };
@@ -69,7 +63,7 @@ public class CriarCheckIn extends JFrame {
         gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
         contentPane.setLayout(gbl_contentPane);
 
-        // Label e campo para o número da acomodação
+   
         JLabel lblNumeroAcomodacao = new JLabel("Número da Acomodação:");
         GridBagConstraints gbc_lblNumeroAcomodacao = new GridBagConstraints();
         gbc_lblNumeroAcomodacao.insets = new Insets(0, 0, 5, 5);
@@ -87,7 +81,7 @@ public class CriarCheckIn extends JFrame {
         contentPane.add(txtNumeroAcomodacao, gbc_txtNumeroAcomodacao);
         txtNumeroAcomodacao.setColumns(10);
 
-        // Label e campo para o CPF do hóspede
+    
         JLabel lblCpfHospede = new JLabel("CPF do Hóspede:");
         GridBagConstraints gbc_lblCpfHospede = new GridBagConstraints();
         gbc_lblCpfHospede.insets = new Insets(0, 0, 5, 5);
@@ -105,7 +99,7 @@ public class CriarCheckIn extends JFrame {
         contentPane.add(txtCpfHospede, gbc_txtCpfHospede);
         txtCpfHospede.setColumns(10);
 
-        // Botão para realizar o check-in
+ 
         JButton btnCheckIn = new JButton("Realizar Check-In");
         GridBagConstraints gbc_btnCheckIn = new GridBagConstraints();
         gbc_btnCheckIn.insets = new Insets(0, 0, 0, 0);
@@ -131,25 +125,25 @@ public class CriarCheckIn extends JFrame {
         }
 
         try {
-            // Converter o número da acomodação para inteiro
+      
             int numeroAcomodacao = Integer.parseInt(numeroAcomodacaoStr);
 
             HospedagemController hospedagemController = MainController.getHospedagemController();
 
-            // Obter Acomodacao do domínio
+            
             domain.Acomodacao acomodacao = MainController.getAcomodacaoController().getAcomodacao(numeroAcomodacao);
 
-            // Converter Acomodacao para AcomodacaoDto
+     
             AcomodacaoDto acomodacaoDto = new AcomodacaoDto(
                 acomodacao.getNumero(),
                 acomodacao.getOcupacaoMax(),
                 acomodacao.getTipo()
             );
 
-            // Obter Hospede do domínio
+   
             domain.Hospede hospede = MainController.getHospedeController().getHospede(cpfHospede);
 
-            // Converter Hospede para HospedeDto
+          
             HospedeDto hospedeDto = new HospedeDto(
                 hospede.getCpf(),
                 hospede.getNome(),
@@ -157,10 +151,10 @@ public class CriarCheckIn extends JFrame {
                 hospede.getTelefone()
             );
 
-            // Criar o DTO para a hospedagem
+       
             HospedagemDto hospedagemDto = new HospedagemDto(acomodacaoDto, hospedeDto);
 
-            // Realizar o check-in
+    
             hospedagemController.createHospedagem(hospedagemDto);
 
             JOptionPane.showMessageDialog(this, "Check-in realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);

@@ -32,7 +32,6 @@ public class Conta implements Serializable{
 	}
 
 	public double getTotal() {
-		// precoTotal = precoTotal + item.getTotal();
 		double precoTotal = 0.0;
 		for (ItemConta item : itens) {
 			precoTotal = precoTotal + item.getPreco();

@@ -15,8 +15,6 @@ public class TipoAcomodacao implements Serializable {
 	public TipoAcomodacao(String name, double tarifaDiaria, double adicionalAcompanhante)
 			throws TipoAcomodacaoException {
 
-		// POde colocar um impedidor pra nao deixar criar uma acomodacao com mesmo nome
-		// de tipo
 
 		if (tarifaDiaria <= 0 || adicionalAcompanhante <= 0) {
 			throw new TipoAcomodacaoException("Tarifas tem que ter valor maior que zero");
@@ -30,16 +28,7 @@ public class TipoAcomodacao implements Serializable {
 		this.tarifaDiaria = tarifaDiaria;
 		this.adicionalAcompanhante = adicionalAcompanhante;
 	}
-	/*
-	 * public TipoAcomodacao(String name, double tarifaDiaria, double
-	 * adicionalAcompanhante) {
-	 * 
-	 * if(tarifaDiaria <= 0 || adicionalAcompanhante <=0) { throw new
-	 * TipoAcomodacaoException("Tarifas tem que ter valor maior que zero"); }
-	 * 
-	 * this.name = name; this.setTarifaDiaria(tarifaDiaria);
-	 * this.adicionalAcompanhante.setAdicionalAcompanhante(adicionalAcompanhante); }
-	 */
+	
 
 	public double getTarifaDiaria() {
 		return tarifaDiaria;

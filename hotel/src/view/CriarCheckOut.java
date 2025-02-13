@@ -26,9 +26,7 @@ public class CriarCheckOut extends JFrame {
 
     private JPanel ContentPanel;
     private JTextField DataCheckOutField;
-    private JComboBox<String> comboBoxIdHospedagem; // Substituído o JTextField por JComboBox
-    private String tipoSelecionado;
-
+    private JComboBox<String> comboBoxIdHospedagem; 
     public CriarCheckOut() {
         ContentPanel = new JPanel();
         setContentPane(ContentPanel);

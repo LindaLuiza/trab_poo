@@ -16,7 +16,6 @@ public class Hospedagem implements Serializable {
     private static final long serialVersionUID = -6398699107241630479L;
 
     private static int inicioCheckin = 13;
-    //private static int limiteCheckout = 12;
     private static int limiteCheckout = 23;
     private final String id;
     private Date checkin;
@@ -84,7 +83,7 @@ public class Hospedagem implements Serializable {
             }
         }
         
-        //valorTotal += conta.getTotal();
+       
 
         return valorTotal;
     }

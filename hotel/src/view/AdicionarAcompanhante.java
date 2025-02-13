@@ -19,8 +19,9 @@ import dtos.HospedeDto;
 
 public class AdicionarAcompanhante extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
+
+    private static final long serialVersionUID = 304831933307633744L;
+	private JPanel contentPane;
     private JComboBox<String> comboBoxIdHospedagem;
     private JTextField CPFField;
     private JTextField NomeField;

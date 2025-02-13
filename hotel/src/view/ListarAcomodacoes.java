@@ -19,24 +19,23 @@ public class ListarAcomodacoes extends JFrame {
 
     public ListarAcomodacoes() {
     	MainController.load();
-        // Inicializa o controlador
+      
         acomodacaoController = MainController.getAcomodacaoController();
 
-        // Configuração da janela
+ 
         setTitle("Lista de Acomodações");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Layout
+
         setLayout(new BorderLayout());
 
-        // Área de texto para mostrar as acomodações
+
         textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
 
-        // Botão para listar acomodações
         listarButton = new JButton("Listar Acomodações");
         listarButton.addActionListener(new ActionListener() {
             @Override
@@ -45,13 +44,13 @@ public class ListarAcomodacoes extends JFrame {
             }
         });
 
-        // Adiciona os componentes na janela
+    
         add(scrollPane, BorderLayout.CENTER);
         add(listarButton, BorderLayout.SOUTH);
     }
 
     private void listarAcomodacoes() {
-        textArea.setText("");  // Limpa o texto anterior
+        textArea.setText("");
 
         List<AcomodacaoDto> acomodacoes = acomodacaoController.getAcomodacoes();
 

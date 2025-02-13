@@ -32,7 +32,6 @@ public class Categoria implements Serializable{
 	}
 
 	
-	//TODO: Remove itens
 	public void removeItem(Item i) {
 		return;
 	}

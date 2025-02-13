@@ -73,7 +73,7 @@ public class ConsultarSaldoDevedor extends JFrame {
 		try {
 			saldoDevedor = hospedagemController.getSaldoDevedor(hospedagemId);
 		} catch (HospedagemException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 

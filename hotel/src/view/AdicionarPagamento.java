@@ -45,17 +45,16 @@ public class AdicionarPagamento extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        // Label e ComboBox para o ID da hospedagem
+        
         JLabel lblIdHospedagem = new JLabel("ID da Hospedagem:");
         gbc.gridx = 0; gbc.gridy = 0; gbc.anchor = GridBagConstraints.EAST;
         contentPane.add(lblIdHospedagem, gbc);
 
         comboBoxIdHospedagem = new JComboBox<>();
-        carregarIdsHospedagem(); // Preencher o ComboBox com os IDs
+        carregarIdsHospedagem(); 
         gbc.gridx = 1; gbc.gridy = 0; gbc.fill = GridBagConstraints.HORIZONTAL;
         contentPane.add(comboBoxIdHospedagem, gbc);
 
-        // Label e ComboBox para o tipo de pagamento
         JLabel lblTipoPagamento = new JLabel("Tipo de Pagamento:");
         gbc.gridx = 0; gbc.gridy = 1;
         contentPane.add(lblTipoPagamento, gbc);
@@ -64,7 +63,7 @@ public class AdicionarPagamento extends JFrame {
         gbc.gridx = 1; gbc.gridy = 1;
         contentPane.add(comboBoxTipoPagamento, gbc);
 
-        // Label e campo para o valor do pagamento
+       
         JLabel lblValorPagamento = new JLabel("Valor do Pagamento:");
         gbc.gridx = 0; gbc.gridy = 2;
         contentPane.add(lblValorPagamento, gbc);
@@ -74,7 +73,7 @@ public class AdicionarPagamento extends JFrame {
         contentPane.add(txtValorPagamento, gbc);
         txtValorPagamento.setColumns(10);
 
-        // Botão para adicionar pagamento
+        
         JButton btnAdicionarPagamento = new JButton("Adicionar Pagamento");
         gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 2;
         contentPane.add(btnAdicionarPagamento, gbc);
@@ -85,8 +84,8 @@ public class AdicionarPagamento extends JFrame {
     private void carregarIdsHospedagem() {
         HospedagemController hospedagemController = MainController.getHospedagemController();
         
-        for (var hospedagem : hospedagemController.getHospedagens()) { // Supondo que existe getHospedagens()
-            comboBoxIdHospedagem.addItem(hospedagem.getId().toString()); // Ajuste conforme o tipo de ID
+        for (var hospedagem : hospedagemController.getHospedagens()) { 
+            comboBoxIdHospedagem.addItem(hospedagem.getId().toString()); 
         }
     }
 

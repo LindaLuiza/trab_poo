@@ -9,9 +9,12 @@ import java.util.TreeMap;
 
 import domain.Categoria;
 import domain.Item;
+import domain.ItemConta;
 import dtos.CategoriaDto;
+import dtos.ItemContaDto;
 import dtos.ItemDto;
 import exception.CategoriaException;
+import exception.ItemContaException;
 import exception.ItemException;
 
 public class ItemController implements Serializable {
@@ -110,4 +113,5 @@ public class ItemController implements Serializable {
             System.out.println("Categoria ou Item não encontrado.");
         }
     }
+    
 }

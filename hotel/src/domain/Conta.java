@@ -13,17 +13,17 @@ public class Conta implements Serializable{
 		this.itens = new ArrayList<ItemConta>();
 	}
 
-	void addItem(ItemConta item, int qtde) {
+	public void addItem(ItemConta item, int qtde) {
 		for (int i = 0; i < qtde; i++) {
 			itens.add(item);
 		}
 	}
 
-	void remove(int index) {
+	public void remove(int index) {
 		itens.remove(index);
 	}
 
-	double getTotal() {
+	public double getTotal() {
 		// precoTotal = precoTotal + item.getTotal();
 		double precoTotal = 0.0;
 		for (ItemConta item : itens) {

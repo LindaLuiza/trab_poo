@@ -7,15 +7,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import domain.Conta;
 import domain.Hospedagem;
+import domain.Item;
+import domain.ItemConta;
 import domain.Pagamento;
 import dtos.AcomodacaoDto;
 import dtos.HospedagemDto;
 import dtos.HospedeDto;
+import dtos.ItemDto;
 import dtos.PagamentoDto;
 import exception.AcomodacaoException;
 import exception.HospedagemException;
 import exception.HospedeException;
+import exception.ItemContaException;
+import exception.ItemException;
 import exception.PagamentoException;
 
 public class HospedagemController implements Serializable {
@@ -51,7 +57,8 @@ public class HospedagemController implements Serializable {
 			Hospedagem h = entry.getValue();
 			lista.add(new HospedagemDto(h.getId(), h.getCheckin(), h.getCheckout(),
 					new AcomodacaoDto(h.getNumeroAcomodacao(), h.getOcupacaoMaxAcomodacao(), h.getTipoAcomodacao()),
-					new HospedeDto(h.getCpfHospede(), h.getNomeHospede(), h.getEmailHospede(), h.getTelephoneHospede())));
+					new HospedeDto(h.getCpfHospede(), h.getNomeHospede(), h.getEmailHospede(),
+							h.getTelephoneHospede())));
 		}
 
 		return lista;
@@ -74,18 +81,19 @@ public class HospedagemController implements Serializable {
 
 	public double getSaldoDevedor(String idHospedagem) throws HospedagemException {
 		Hospedagem hospedagem = getHospedagemById(idHospedagem);
-		double valorTotal = hospedagem.calcularValorTotal();
+		double valorTotal = hospedagem.calcularValorTotalSaldo();
 		double totalPago = hospedagem.getPagamento().stream().mapToDouble(Pagamento::getValor).sum();
 		return Math.max(0, valorTotal - totalPago);
 	}
-	
+
 	public double getSaldoTotal(String idHospedagem) throws HospedagemException {
 		Hospedagem hospedagem = getHospedagemById(idHospedagem);
 		double valorTotal = hospedagem.calcularValorTotal();
 		return valorTotal;
 	}
 
-	public void addPagamento(String idHospedagem, PagamentoDto pagamento) throws HospedagemException, PagamentoException {
+	public void addPagamento(String idHospedagem, PagamentoDto pagamento)
+			throws HospedagemException, PagamentoException {
 		Hospedagem hospedagem = getHospedagemById(idHospedagem);
 		hospedagem.addPagamento(new Pagamento(pagamento.getTipo(), pagamento.getValor()));
 		MainController.save();
@@ -102,6 +110,30 @@ public class HospedagemController implements Serializable {
 			throw new HospedagemException("Hospedagem com ID " + idHospedagem + " não encontrada.");
 		}
 		return hospedagem;
+	}
+
+	public void addItemConta(String idHospedagem, long codigoItem, int qtde) {
+		ItemController itemController = MainController.getItemController();
+		ItemDto item = itemController.getItemByCodigo(codigoItem);
+		ItemConta itemConta = null;
+		try {
+			itemConta = new ItemConta(qtde, new Item(item.getCodigo(), item.getDescricao(), item.getPreco()));
+		} catch (ItemContaException | ItemException e) {
+			System.out.println("Erro ao adicionar Item a Conta" + e);
+		}
+
+		Hospedagem hospedagem = null;
+		
+		try {
+			hospedagem = getHospedagemById(idHospedagem);
+		} catch (HospedagemException e) {
+			System.out.println("Erro: Hospedagem não encontrada");
+		}
+		
+		Conta conta = hospedagem.getConta();
+		
+		conta.addItem(itemConta, qtde);
+
 	}
 
 }

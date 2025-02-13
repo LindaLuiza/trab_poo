@@ -88,6 +88,29 @@ public class Hospedagem implements Serializable {
 
         return valorTotal;
     }
+    
+    public double calcularValorTotalSaldo() {
+    	Date agora = new Date();
+        int diasHospedagem = UtilDate.countDaysBetweenDates(checkin, agora);
+        if (diasHospedagem == 0) diasHospedagem = 1; 
+        
+        double tarifaDiaria = acomodacao.getTarifaDiaria();
+        
+        //double valorTotal = diasHospedagem * tarifaDiaria;
+        double valorTotal = tarifaDiaria;
+
+        if(acompanhantes.size() > 0) {
+        	for (int i = 1; i < acompanhantes.size(); i++) {
+                valorTotal += tarifaDiaria * 0.1;
+                System.out.println(valorTotal);
+            }
+        }
+        
+        valorTotal += conta.getTotal();
+
+        return valorTotal;
+    }
+
 
     public void realizarCheckout(String data) throws HospedagemException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -199,6 +222,10 @@ public class Hospedagem implements Serializable {
 
     public String getId() {
         return id;
+    }
+    
+    public Conta getConta() {
+    	return conta;
     }
     
     public int getNumeroAcomodacao() {

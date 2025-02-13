@@ -1,23 +1,22 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import exception.ItemContaException;
 
-public class ItemConta {
+public class ItemConta implements Serializable {
 
+	private static final long serialVersionUID = 2835191358738544934L;
+	
 	private final Date dataHora;
 	private final double preco;
 	private final int qtde;
 	private final Item item;
 
-	public ItemConta(double preco, int qtde, Item item) throws ItemContaException {
-		if (preco <= 0) {
-			throw new ItemContaException("Preço deve ser maior que zero.");
-		}
-
+	public ItemConta(int qtde, Item item) throws ItemContaException {
 		this.dataHora = new Date();
-		this.preco = preco;
+		this.preco = item.getPreco();
 		this.qtde = qtde;
 		this.item = item;
 	}

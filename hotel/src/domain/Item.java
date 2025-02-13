@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class Item implements Serializable {
 
 	private static final long serialVersionUID = 6790133997129548569L;
+	
 	private final long codigo;
 	private final String descricao;
 	private double preco;

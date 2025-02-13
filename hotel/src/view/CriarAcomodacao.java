@@ -115,7 +115,7 @@ public class CriarAcomodacao extends JFrame {
 		panel.setLayout(gl_panel);
 		ContentPanel.setLayout(gl_contentPanel);
 
-		setTitle("Criar Item");
+		setTitle("Criar Acomodacao");
 		setSize(425, 260);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

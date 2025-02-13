@@ -33,7 +33,7 @@ public class HospedeDto {
 
 	@Override
 	public String toString() {
-		return "HospedeDto [cpf=" + cpf + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + "]";
+		return "cpf=" + cpf + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + "";
 	}
 
 }

@@ -1,198 +1,207 @@
 package domain;
 
 import java.io.Serializable;
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 import exception.HospedagemException;
 import exception.PagamentoException;
+import util.UtilDate;
 
-public class Hospedagem implements Serializable{
+public class Hospedagem implements Serializable {
 
-	private static final long serialVersionUID = -6398699107241630479L;
-	
-	private static int inicioCheckin = 13;
-	private static int limiteCheckout = 12;
-	private final String id;
-	private LocalDateTime checkin;
-	private LocalDateTime checkout;
-	private IAcomodacao acomodacao;
-	private IHospede hospede;
-	private ArrayList<IHospede> acompanhantes;
-	private ArrayList<Pagamento> pagamento;
-	private Conta conta;
+    private static final long serialVersionUID = -6398699107241630479L;
 
-	public Hospedagem(Acomodacao acomodacao, Hospede hospede) throws HospedagemException {
+    private static int inicioCheckin = 13;
+    //private static int limiteCheckout = 12;
+    private static int limiteCheckout = 23;
+    private final String id;
+    private Date checkin;
+    private Date checkout;
+    private Acomodacao acomodacao;
+    private Hospede hospede;
+    private ArrayList<Hospede> acompanhantes;
+    private ArrayList<Pagamento> pagamento;
+    private Conta conta;
 
-		if (acomodacao.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL) {
-			throw new HospedagemException("A Acomodação selecionada não está disponível.");
-		}
-		
-		this.acompanhantes = new ArrayList<IHospede>();
-		
-		if (acompanhantes.size() + 1 > acomodacao.getOcupacaoMax()) { 
+    public Hospedagem(Acomodacao acomodacao, Hospede hospede) throws HospedagemException {
+        if (acomodacao.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL) {
+            throw new HospedagemException("A Acomodação selecionada não está disponível.");
+        }
+
+        this.acompanhantes = new ArrayList<>();
+        this.pagamento = new ArrayList<>();
+
+        if (acompanhantes.size() + 1 > acomodacao.getOcupacaoMax()) {
             throw new HospedagemException("Número de hóspedes excede a capacidade máxima da acomodação.");
         }
 
-		LocalDateTime agora = LocalDateTime.now();
-		if (agora.getHour() < inicioCheckin) {
-			throw new HospedagemException("O check-in só pode ser feito a partir das 13h.");
-		}
+        Date agora = new Date();
+        if (agora.getHours() < inicioCheckin) {
+            throw new HospedagemException("O check-in só pode ser feito a partir das 13h.");
+        }
 
-		id = UUID.randomUUID().toString();
-		//System.out.println("ID: " + id);
-		this.checkin = agora;
-		//this.checkout = checkout.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
-		this.acomodacao = acomodacao;
-		this.hospede = hospede;
-		this.acompanhantes = new ArrayList<IHospede>();
-		this.conta = new Conta();
+        this.id = UUID.randomUUID().toString();
+        this.checkin = agora;
+        this.acomodacao = acomodacao;
+        System.out.println(acomodacao.getTarifaDiaria());
+        this.hospede = hospede;
+        this.conta = new Conta();
 
-		acomodacao.setEstadoOcupacao(EEstadoOcupacao.OCUPADO);
-	}
+        acomodacao.setEstadoOcupacao(EEstadoOcupacao.OCUPADO);
+    }
 
-	public void addAcompanhantes(ArrayList<IHospede> acompanhantes) throws HospedagemException{
-		if (this.acompanhantes.size() + acompanhantes.size() > acomodacao.getOcupacaoMax()) {
+    public void addAcompanhantes(ArrayList<Hospede> acompanhantes) throws HospedagemException {
+        if (this.acompanhantes.size() + acompanhantes.size() > acomodacao.getOcupacaoMax()) {
             throw new HospedagemException("Número de acompanhantes excede a capacidade máxima da acomodação.");
         }
-		
-		this.acompanhantes.addAll(acompanhantes);
-	}
-	
-	public void addPagamento(Pagamento pagamento) throws PagamentoException {
-	    if (pagamento == null) {
-	        throw new PagamentoException("O pagamento não pode ser nulo.");
-	    }
+        this.acompanhantes.addAll(acompanhantes);
+    }
 
-	    this.pagamento.add(pagamento);
-	}
+    public void addPagamento(Pagamento pagamento) throws PagamentoException {
+        if (pagamento == null) {
+            throw new PagamentoException("O pagamento não pode ser nulo.");
+        }
+        this.pagamento.add(pagamento);
+    }
 
+    public double calcularValorTotal() {
+        int diasHospedagem = UtilDate.countDaysBetweenDates(checkin, checkout);
+        if (diasHospedagem == 0) diasHospedagem = 1; 
+        
+        double tarifaDiaria = acomodacao.getTarifaDiaria();
+        
+        //double valorTotal = diasHospedagem * tarifaDiaria;
+        double valorTotal = tarifaDiaria;
 
-	public double calcularValorTotal() {
-		Duration duration = Duration.between(checkin, checkout);
-		long diasHospedagem = duration.toDays();
+        if(acompanhantes.size() > 0) {
+        	for (int i = 1; i < acompanhantes.size(); i++) {
+                valorTotal += tarifaDiaria * 0.1;
+                System.out.println(valorTotal);
+            }
+        }
+        
+        //valorTotal += conta.getTotal();
 
-		double tarifaDiaria = acomodacao.getTarifaDiaria();
-		double valorTotal = diasHospedagem * tarifaDiaria;
+        return valorTotal;
+    }
 
-		for (int i = 1; i < acompanhantes.size(); i++) {
-			valorTotal += tarifaDiaria * 0.1;
-		}
+    public void realizarCheckout(String data) throws HospedagemException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            this.checkout = sdf.parse(data);
+        } catch (ParseException e) {
+            throw new HospedagemException("Data de checkout inválida. Use o formato dd/MM/yyyy.");
+        }
 
-		valorTotal += conta.getTotal();
+        Date agora = new Date();
+        if (agora.getHours() > limiteCheckout) {
+            throw new HospedagemException("O check-out deve ser feito até as 12h.");
+        }
 
-		return valorTotal;
-	}
+        double valorTotal = calcularValorTotal();
+        
+        if (this.pagamento.isEmpty()) {
+            throw new HospedagemException("Nenhum pagamento foi realizado. Realize o pagamento de R$ " + valorTotal + " primeiro.");
+        }
 
-	public void realizarCheckout() throws HospedagemException {
-		LocalDateTime agora = LocalDateTime.now();
-		if (agora.getHour() > limiteCheckout) {
-			throw new HospedagemException("O check-out deve ser feito até as 12h.");
-		}
-		
-		double valorTotal = calcularValorTotal();
-	    double totalPago = pagamento.stream().mapToDouble(Pagamento::getValor).sum();
+        double totalPago = pagamento.stream().mapToDouble(Pagamento::getValor).sum();
 
-	    if (totalPago < valorTotal) {
-	        double saldoDevedor = valorTotal - totalPago;
-	        throw new HospedagemException(String.format("Pagamento insuficiente. Saldo devedor: R$ %.2f", saldoDevedor));
-	    }
-		
-		this.checkout = agora;
+        if (totalPago < valorTotal) {
+            double saldoDevedor = valorTotal - totalPago;
+            throw new HospedagemException(String.format("Pagamento insuficiente. Saldo devedor: R$ %.2f", saldoDevedor));
+        }
 
-		// Exibe a lista e o total da conta
-		StringBuilder sb = new StringBuilder();
-		sb.append("Informações da Hospedagem:\n");
-		sb.append(listar());
-		sb.append(String.format("Valor total das diárias: %.2f\n", calcularValorTotal()));
+        System.out.println(listar());
+        acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);
+    }
 
+    public StringBuilder listar() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("ID: %s%n", id));
+        sb.append(String.format("Check-in: %s%n", sdf.format(checkin)));
+        sb.append(String.format("Check-out: %s%n", checkout != null ? sdf.format(checkout) : "Não realizado"));
+        sb.append(String.format("Hóspede: %s%n", hospede.getNome()));
+        sb.append(String.format("Acomodação: %s%n", acomodacao.getNumero()));
+        sb.append(String.format("Número de acompanhantes: %d%n", acompanhantes.size()));
+        return sb;
+    }
 
-		System.out.println(sb.toString());
+    // Getters e Setters
 
-		acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);
-	}
-	
-	
+    public static int getInicioCheckin() {
+        return inicioCheckin;
+    }
 
-	public static int getInicioCheckin() {
-		return inicioCheckin;
-	}
+    public static void setInicioCheckin(int inicioCheckin) {
+        Hospedagem.inicioCheckin = inicioCheckin;
+    }
 
-	public static void setInicioCheckin(int inicioCheckin) {
-		Hospedagem.inicioCheckin = inicioCheckin;
-	}
+    public static int getLimiteCheckout() {
+        return limiteCheckout;
+    }
 
-	public static int getLimiteCheckout() {
-		return limiteCheckout;
-	}
+    public static void setLimiteCheckout(int limiteCheckout) {
+        Hospedagem.limiteCheckout = limiteCheckout;
+    }
 
-	public static void setLimiteCheckout(int limiteCheckout) {
-		Hospedagem.limiteCheckout = limiteCheckout;
-	}
+    public Date getCheckin() {
+        return checkin;
+    }
 
-	public LocalDateTime getCheckin() {
-		return checkin;
-	}
+    public void setCheckin(Date checkin) {
+        this.checkin = checkin;
+    }
 
-	public void setCheckin(LocalDateTime checkin) {
-		this.checkin = checkin;
-	}
+    public Date getCheckout() {
+        return checkout;
+    }
 
-	public LocalDateTime getCheckout() {
-		return checkout;
-	}
+    public void setCheckout(Date checkout) {
+        this.checkout = checkout;
+    }
 
-	public void setCheckout(LocalDateTime checkout) {
-		this.checkout = checkout;
-	}
+    public IAcomodacao getAcomodacao() {
+        return acomodacao;
+    }
 
-	public IAcomodacao getAcomodacao() {
-		return acomodacao;
-	}
+    public void setAcomodacao(Acomodacao acomodacao) {
+        this.acomodacao = acomodacao;
+    }
 
-	public void setAcomodacao(IAcomodacao acomodacao) {
-		this.acomodacao = acomodacao;
-	}
+    public IHospede getHospede() {
+        return hospede;
+    }
 
-	public IHospede getHospede() {
-		return hospede;
-	}
+    public void setHospede(Hospede hospede) {
+        this.hospede = hospede;
+    }
 
-	public void setHospede(IHospede hospede) {
-		this.hospede = hospede;
-	}
+    public ArrayList<Hospede> getAcompanhantes() {
+        return acompanhantes;
+    }
 
-	public ArrayList<IHospede> getAcompanhantes() {
-		return acompanhantes;
-	}
+    public void setAcompanhantes(ArrayList<Hospede> acompanhantes) {
+        this.acompanhantes = acompanhantes;
+    }
 
-	public void setAcompanhantes(ArrayList<IHospede> acompanhantes) {
-		this.acompanhantes = acompanhantes;
-	}
+    public ArrayList<Pagamento> getPagamento() {
+        return pagamento;
+    }
 
-	public ArrayList<Pagamento> getPagamento() {
-		return pagamento;
-	}
+    public void setPagamento(ArrayList<Pagamento> pagamento) {
+        this.pagamento = pagamento;
+    }
 
-	public void setPagamento(ArrayList<Pagamento> pagamento) {
-		this.pagamento = pagamento;
-	}
-/*
-	public IConta getConta() {
-		return conta;
-	}
-
-	public void setConta(IConta conta) {
-		this.conta = conta;
-	}
-*/
-	public String getId() {
-		return id;
-	}
-	
-	public int getNumeroAcomodacao() {
+    public String getId() {
+        return id;
+    }
+    
+    public int getNumeroAcomodacao() {
 		return acomodacao.getNumero();
 	}
 	
@@ -219,15 +228,5 @@ public class Hospedagem implements Serializable{
 	public long getTelephoneHospede() {
 		return hospede.getTelefone();
 	}
-	
-	public StringBuilder listar() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(String.format("ID: %s%n", id));
-		sb.append(String.format("Check-in: %s%n", checkin));
-		sb.append(String.format("Check-out: %s%n", checkout));
-		sb.append(String.format("Hóspede: %s%n", hospede.getNome()));
-		sb.append(String.format("Acomodação: %s%n", acomodacao.getNumero()));
-		sb.append(String.format("Número de acompanhantes: %d%n", acompanhantes.size()));
-		return sb;
-	}
+
 }

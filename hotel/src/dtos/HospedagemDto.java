@@ -1,12 +1,12 @@
 package dtos;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class HospedagemDto {
 
 	private String id;
-	private LocalDateTime checkin;
-	private LocalDateTime checkout;
+	private Date checkin;
+	private Date checkout;
 	private AcomodacaoDto acomodacao;
 	private HospedeDto hospede;
 	// private ContaDto conta;
@@ -16,7 +16,7 @@ public class HospedagemDto {
 		this.hospede = hospede;
 	}
 
-	public HospedagemDto(String id, LocalDateTime checkin, LocalDateTime checkout, AcomodacaoDto acomodacao,
+	public HospedagemDto(String id, Date checkin, Date checkout, AcomodacaoDto acomodacao,
 			HospedeDto hospede) {
 		this.id = id;
 		this.checkin = checkin;
@@ -30,11 +30,11 @@ public class HospedagemDto {
 		return id;
 	}
 
-	public LocalDateTime getCheckin() {
+	public Date getCheckin() {
 		return checkin;
 	}
 
-	public LocalDateTime getCheckout() {
+	public Date getCheckout() {
 		return checkout;
 	}
 

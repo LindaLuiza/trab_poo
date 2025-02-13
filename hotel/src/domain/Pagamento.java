@@ -1,11 +1,14 @@
 package domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import exception.PagamentoException;
 
-public class Pagamento {
+public class Pagamento implements Serializable{
 
+	private static final long serialVersionUID = -2045452559978346057L;
+	
 	private final ETipoPagamento tipo;
 	private final Date data;
 	private final double valor;

@@ -12,6 +12,7 @@ import domain.Pagamento;
 import dtos.AcomodacaoDto;
 import dtos.HospedagemDto;
 import dtos.HospedeDto;
+import dtos.PagamentoDto;
 import exception.AcomodacaoException;
 import exception.HospedagemException;
 import exception.HospedeException;
@@ -56,14 +57,14 @@ public class HospedagemController implements Serializable {
 		return lista;
 	}
 
-	public void realizarCheckoutHospedagem(String idHospedagem) throws HospedagemException {
+	public void realizarCheckoutHospedagem(String idHospedagem, String checkOutDate) throws HospedagemException {
 		Hospedagem hospedagem = hospedagens.get(idHospedagem);
 		if (hospedagem == null) {
 			throw new HospedagemException("Hospedagem com ID " + idHospedagem + " não encontrada.");
 		}
 
 		try {
-			hospedagem.realizarCheckout();
+			hospedagem.realizarCheckout(checkOutDate);
 			System.out.println("Checkout finalizado para a hospedagem ID: " + idHospedagem);
 			MainController.save();
 		} catch (HospedagemException e) {
@@ -78,9 +79,9 @@ public class HospedagemController implements Serializable {
 		return Math.max(0, valorTotal - totalPago);
 	}
 
-	public void addPagamento(String idHospedagem, Pagamento pagamento) throws HospedagemException, PagamentoException {
+	public void addPagamento(String idHospedagem, PagamentoDto pagamento) throws HospedagemException, PagamentoException {
 		Hospedagem hospedagem = getHospedagemById(idHospedagem);
-		hospedagem.addPagamento(pagamento);
+		hospedagem.addPagamento(new Pagamento(pagamento.getTipo(), pagamento.getValor()));
 		MainController.save();
 	}
 

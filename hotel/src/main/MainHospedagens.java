@@ -6,13 +6,16 @@ import controller.AcomodacaoController;
 import controller.HospedagemController;
 import controller.HospedeController;
 import controller.MainController;
+import domain.ETipoPagamento;
 import dtos.AcomodacaoDto;
 import dtos.HospedagemDto;
 import dtos.HospedeDto;
+import dtos.PagamentoDto;
 import dtos.TipoAcomodacaoDto;
 import exception.AcomodacaoException;
 import exception.HospedagemException;
 import exception.HospedeException;
+import exception.PagamentoException;
 import exception.TipoAcomodacaoException;
 
 public class MainHospedagens {
@@ -42,12 +45,15 @@ public class MainHospedagens {
             	String id = i.getId();
     			System.out.println(id);
     			System.out.println(i.getNumeroAcomodacao());
-    			hospedagemController.realizarCheckoutHospedagem(id);
+    			
+    			hospedagemController.addPagamento(id, new PagamentoDto(ETipoPagamento.DEBITO, 2100));
+    			
+    			hospedagemController.realizarCheckoutHospedagem(id, "19/02/2025");
     		}
             
             
 
-        } catch (TipoAcomodacaoException | AcomodacaoException | HospedeException | HospedagemException  e) {
+        } catch (PagamentoException | TipoAcomodacaoException | AcomodacaoException | HospedeException | HospedagemException  e) {
             System.err.println("Erro: " + e.getMessage());
         }
     }

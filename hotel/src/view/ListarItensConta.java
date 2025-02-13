@@ -10,8 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ListarItensConta extends JFrame {
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
+    
+    private static final long serialVersionUID = -297695865539444270L;
+	private JPanel contentPane;
     private JComboBox<String> comboBoxIdHospedagem;
     private JTable table;
     private DefaultTableModel tableModel;

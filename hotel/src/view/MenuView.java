@@ -229,6 +229,14 @@ public class MenuView extends JFrame {
 				listarItensConta.setVisible(true);
 			}
 		});
+		
+		JButton btnListarAcompanhantes = new JButton("Listar Acompanhantes");
+		btnListarAcompanhantes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarAcompanhantes listarAcompanhantes = new ListarAcompanhantes(HospedagemId);
+				listarAcompanhantes.setVisible(true);
+			}
+		});
 		GroupLayout gl_ListarBotoesContainer = new GroupLayout(ListarBotoesContainer);
 		gl_ListarBotoesContainer.setHorizontalGroup(
 			gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
@@ -237,7 +245,7 @@ public class MenuView extends JFrame {
 						.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
 							.addGap(79)
 							.addComponent(ListarHospede)
-							.addGap(94)
+							.addGap(100)
 							.addComponent(ListarItens))
 						.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
 							.addGroup(gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
@@ -249,15 +257,18 @@ public class MenuView extends JFrame {
 									.addComponent(ListarTipoAcomodacao)))
 							.addGroup(gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
-									.addGap(46)
-									.addComponent(ListarCategorias))
-								.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
 									.addGap(38)
-									.addComponent(btnListarHospedagens))))
+									.addComponent(btnListarAcompanhantes))
+								.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+									.addGap(46)
+									.addComponent(btnListarHospedagens))
+								.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+									.addGap(54)
+									.addComponent(ListarCategorias))))
 						.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
 							.addGap(66)
 							.addComponent(btnListarItensDa)))
-					.addContainerGap(84, Short.MAX_VALUE))
+					.addContainerGap(112, Short.MAX_VALUE))
 		);
 		gl_ListarBotoesContainer.setVerticalGroup(
 			gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
@@ -275,7 +286,9 @@ public class MenuView extends JFrame {
 						.addComponent(ListarTipoAcomodacao)
 						.addComponent(btnListarHospedagens))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnListarItensDa)
+					.addGroup(gl_ListarBotoesContainer.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnListarItensDa)
+						.addComponent(btnListarAcompanhantes))
 					.addContainerGap(31, Short.MAX_VALUE))
 		);
 		ListarBotoesContainer.setLayout(gl_ListarBotoesContainer);

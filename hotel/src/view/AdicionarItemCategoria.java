@@ -40,10 +40,9 @@ public class AdicionarItemCategoria extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(10, 10, 10, 10)); // Margens internas
+        contentPane.setBorder(new EmptyBorder(10, 10, 10, 10)); 
         setContentPane(contentPane);
 
-        // Usar GridBagLayout para um layout responsivo
         GridBagLayout gbl_contentPane = new GridBagLayout();
         gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
         gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0 };
@@ -51,7 +50,6 @@ public class AdicionarItemCategoria extends JFrame {
         gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
         contentPane.setLayout(gbl_contentPane);
 
-        // Label e ComboBox para Categoria
         JLabel lblCategoria = new JLabel("Categoria:");
         GridBagConstraints gbc_lblCategoria = new GridBagConstraints();
         gbc_lblCategoria.insets = new Insets(0, 0, 5, 5);
@@ -68,7 +66,6 @@ public class AdicionarItemCategoria extends JFrame {
         gbc_categoriaComboBox.gridy = 0;
         contentPane.add(categoriaComboBox, gbc_categoriaComboBox);
 
-        // Label e JList para Itens
         JLabel lblItem = new JLabel("Item:");
         GridBagConstraints gbc_lblItem = new GridBagConstraints();
         gbc_lblItem.insets = new Insets(0, 0, 5, 5);
@@ -88,7 +85,6 @@ public class AdicionarItemCategoria extends JFrame {
         gbc_scrollPane.gridy = 1;
         contentPane.add(scrollPane, gbc_scrollPane);
 
-        // Botão para adicionar item à categoria
         JButton btnAdicionar = new JButton("Adicionar Item à Categoria");
         GridBagConstraints gbc_btnAdicionar = new GridBagConstraints();
         gbc_btnAdicionar.insets = new Insets(0, 0, 0, 0);
@@ -126,7 +122,6 @@ public class AdicionarItemCategoria extends JFrame {
         ItemDto itemSelecionado = itemList.getSelectedValue();
 
         if (nomeCategoria != null && itemSelecionado != null) {
-            // Verifica se o item já existe na categoria
             CategoriaDto categoria = itemController.getCategoriaByNome(nomeCategoria);
             if (categoria != null) {
                 boolean itemJaExiste = categoria.getItens().stream()

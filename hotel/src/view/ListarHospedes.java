@@ -37,7 +37,6 @@ public class ListarHospedes extends JFrame {
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         setContentPane(contentPane);
 
-        // Usar GridBagLayout para um layout responsivo
         GridBagLayout gbl_contentPane = new GridBagLayout();
         gbl_contentPane.columnWidths = new int[] { 0, 0 };
         gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
@@ -45,7 +44,6 @@ public class ListarHospedes extends JFrame {
         gbl_contentPane.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
         contentPane.setLayout(gbl_contentPane);
 
-        // Lista de hóspedes
         listModel = new DefaultListModel<>();
         listHospedes = new JList<>(listModel);
         JScrollPane scrollPane = new JScrollPane(listHospedes);
@@ -56,7 +54,6 @@ public class ListarHospedes extends JFrame {
         gbc_scrollPane.gridy = 0;
         contentPane.add(scrollPane, gbc_scrollPane);
 
-        // Botão para atualizar a lista
         JButton btnAtualizar = new JButton("Atualizar Lista");
         GridBagConstraints gbc_btnAtualizar = new GridBagConstraints();
         gbc_btnAtualizar.insets = new Insets(0, 0, 0, 0);
@@ -70,7 +67,6 @@ public class ListarHospedes extends JFrame {
             }
         });
 
-        // Carregar a lista de hóspedes ao abrir a janela
         carregarHospedes();
     }
 
@@ -78,15 +74,12 @@ public class ListarHospedes extends JFrame {
         HospedeController hospedeController = MainController.getHospedeController();
         List<HospedeDto> hospedes = hospedeController.getHospedes();
 
-        // Limpar a lista atual
         listModel.clear();
 
-        // Adicionar os hóspedes à lista
         for (HospedeDto hospede : hospedes) {
             listModel.addElement(hospede);
         }
 
-        // Exibir mensagem se não houver hóspedes cadastrados
         if (hospedes.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Nenhum hóspede cadastrado.", "Informação", JOptionPane.INFORMATION_MESSAGE);
         }

@@ -19,24 +19,20 @@ public class ListarItens extends JFrame {
 
     public ListarItens() {
     	MainController.load();
-        // Inicializa o controlador de itens
+        
         itemController = MainController.getItemController();
 
-        // Configuração da janela
         setTitle("Lista de Itens");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Layout
         setLayout(new BorderLayout());
 
-        // Área de texto para mostrar os itens
         textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
 
-        // Botão para listar itens
         listarButton = new JButton("Listar Itens");
         listarButton.addActionListener(new ActionListener() {
             @Override
@@ -45,15 +41,13 @@ public class ListarItens extends JFrame {
             }
         });
 
-        // Adiciona os componentes na janela
         add(scrollPane, BorderLayout.CENTER);
         add(listarButton, BorderLayout.SOUTH);
     }
 
     private void listarItens() {
-        textArea.setText("");  // Limpa o texto anterior
+        textArea.setText("");  
 
-        // Obtém a lista de itens
         List<ItemDto> itens = itemController.getAllItems();
 
         if (itens.isEmpty()) {

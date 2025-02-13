@@ -50,6 +50,8 @@ public class MenuView extends JFrame {
 		JButton CheckOut = new JButton(" Realizar Check Out   ");
 		CheckOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CriarCheckOut checkOut = new CriarCheckOut();
+				checkOut.setVisible(true);
 			}
 		});
 		GroupLayout gl_HospedagensContainer = new GroupLayout(HospedagensContainer);

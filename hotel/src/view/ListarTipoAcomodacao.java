@@ -18,24 +18,19 @@ public class ListarTipoAcomodacao extends JFrame {
     private AcomodacaoController acomodacaoController; 
     public ListarTipoAcomodacao() {
         MainController.load();
-        // Inicializa o controlador de acomodação
         acomodacaoController = MainController.getAcomodacaoController();
 
-        // Configuração da janela
         setTitle("Lista de Tipos de Acomodação");
         setSize(400, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Layout
         setLayout(new BorderLayout());
-
-        // Área de texto para mostrar os tipos de acomodação
+        
         textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
 
-        // Botão para listar tipos de acomodação
         listarButton = new JButton("Listar Tipos de Acomodação");
         listarButton.addActionListener(new ActionListener() {
             @Override
@@ -44,15 +39,13 @@ public class ListarTipoAcomodacao extends JFrame {
             }
         });
 
-        // Adiciona os componentes na janela
         add(scrollPane, BorderLayout.CENTER);
         add(listarButton, BorderLayout.SOUTH);
     }
 
     private void listarTiposAcomodacao() {
-        textArea.setText("");  // Limpa o texto anterior
+        textArea.setText("");  
 
-        // Obtém a lista de tipos de acomodação
         List<TipoAcomodacaoDto> tiposAcomodacao = acomodacaoController.getTiposAcomodacoes();
 
         if (tiposAcomodacao.isEmpty()) {

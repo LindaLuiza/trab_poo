@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -31,16 +30,6 @@ public class AdicionarPagamento extends JFrame {
     private JTextField txtValorPagamento;
     private JComboBox<String> comboBoxTipoPagamento;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                AdicionarPagamento frame = new AdicionarPagamento();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
     public AdicionarPagamento() {
     	MainController.load();

@@ -257,6 +257,12 @@ public class MenuView extends JFrame {
 		PagamentosContainer.add(ProcessarPagamento);
 
 		JButton CriarPagamento = new JButton("Adicionar Pagamento");
+		CriarPagamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdicionarPagamento adicionarPagamento = new AdicionarPagamento();  // Abre a janela de listagem de itens
+			     adicionarPagamento.setVisible(true);
+			}
+		});
 
 		JButton ConsultarSaldoDevedor = new JButton("Consultar Saldo Devedor");
 

@@ -9,6 +9,7 @@ import java.util.TreeMap;
 
 import domain.Conta;
 import domain.Hospedagem;
+import domain.Hospede;
 import domain.Item;
 import domain.ItemConta;
 import domain.Pagamento;
@@ -170,6 +171,25 @@ public class HospedagemController implements Serializable {
 	    }
 
 	    System.out.printf("Total da Conta: R$ %.2f%n", totalConta);
+	}
+	
+	public void adicionarAcompanhante(String idHospedagem, HospedeDto acompanhante) {
+	    try {
+	        Hospedagem hospedagem = getHospedagemById(idHospedagem);
+	        
+	        if (hospedagem == null) {
+	            System.out.println("Hospedagem não encontrada.");
+	            return;
+	        }
+
+	        hospedagem.addAcompanhante(new Hospede(acompanhante.getCpf(), acompanhante.getNome(), acompanhante.getEmail(), acompanhante.getTelefone()));
+	        System.out.println("Acompanhante adicionado com sucesso!");
+
+	    } catch (HospedagemException e) {
+	        System.out.println("Erro ao adicionar acompanhante: " + e.getMessage());
+	    } catch (HospedeException e) {
+			System.out.println("Hoapede Exception" + e);
+		}
 	}
 
 }

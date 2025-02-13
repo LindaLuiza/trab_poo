@@ -54,11 +54,11 @@ public class Hospedagem implements Serializable {
         acomodacao.setEstadoOcupacao(EEstadoOcupacao.OCUPADO);
     }
 
-    public void addAcompanhantes(ArrayList<Hospede> acompanhantes) throws HospedagemException {
-        if (this.acompanhantes.size() + acompanhantes.size() > acomodacao.getOcupacaoMax()) {
+    public void addAcompanhante(Hospede acompanhante) throws HospedagemException {
+        if (this.acompanhantes.size() + 1 > acomodacao.getOcupacaoMax()) {
             throw new HospedagemException("Número de acompanhantes excede a capacidade máxima da acomodação.");
         }
-        this.acompanhantes.addAll(acompanhantes);
+        this.acompanhantes.add(acompanhante);
     }
 
     public void addPagamento(Pagamento pagamento) throws PagamentoException {

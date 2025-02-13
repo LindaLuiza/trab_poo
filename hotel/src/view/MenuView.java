@@ -54,27 +54,34 @@ public class MenuView extends JFrame {
 				checkOut.setVisible(true);
 			}
 		});
+		
+		JButton btnAdicionarAcompanhante = new JButton("Adicionar Acompanhante");
 		GroupLayout gl_HospedagensContainer = new GroupLayout(HospedagensContainer);
 		gl_HospedagensContainer.setHorizontalGroup(
 			gl_HospedagensContainer.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_HospedagensContainer.createSequentialGroup()
 					.addGroup(gl_HospedagensContainer.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_HospedagensContainer.createSequentialGroup()
-							.addGap(143)
-							.addComponent(CheckIn))
+							.addGap(160)
+							.addComponent(btnAdicionarAcompanhante))
 						.addGroup(gl_HospedagensContainer.createSequentialGroup()
-							.addGap(135)
-							.addComponent(CheckOut)))
+							.addGap(174)
+							.addComponent(CheckOut))
+						.addGroup(gl_HospedagensContainer.createSequentialGroup()
+							.addGap(186)
+							.addComponent(CheckIn)))
 					.addContainerGap(180, Short.MAX_VALUE))
 		);
 		gl_HospedagensContainer.setVerticalGroup(
 			gl_HospedagensContainer.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_HospedagensContainer.createSequentialGroup()
-					.addGap(23)
+					.addGap(17)
 					.addComponent(CheckIn)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(CheckOut)
-					.addContainerGap(92, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnAdicionarAcompanhante)
+					.addContainerGap(55, Short.MAX_VALUE))
 		);
 		HospedagensContainer.setLayout(gl_HospedagensContainer);
 

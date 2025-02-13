@@ -78,6 +78,12 @@ public class HospedagemController implements Serializable {
 		double totalPago = hospedagem.getPagamento().stream().mapToDouble(Pagamento::getValor).sum();
 		return Math.max(0, valorTotal - totalPago);
 	}
+	
+	public double getSaldoTotal(String idHospedagem) throws HospedagemException {
+		Hospedagem hospedagem = getHospedagemById(idHospedagem);
+		double valorTotal = hospedagem.calcularValorTotal();
+		return valorTotal;
+	}
 
 	public void addPagamento(String idHospedagem, PagamentoDto pagamento) throws HospedagemException, PagamentoException {
 		Hospedagem hospedagem = getHospedagemById(idHospedagem);

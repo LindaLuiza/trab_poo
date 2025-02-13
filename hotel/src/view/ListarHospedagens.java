@@ -8,8 +8,9 @@ import controller.MainController;
 import dtos.HospedagemDto;
 
 public class ListarHospedagens extends JFrame {
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
+
+    private static final long serialVersionUID = -6671682771481820010L;
+	private JPanel contentPane;
     private JList<String> listHospedagens;
     private DefaultListModel<String> listModel;
 

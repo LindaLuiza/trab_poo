@@ -265,8 +265,20 @@ public class MenuView extends JFrame {
 		});
 
 		JButton ConsultarSaldoDevedor = new JButton("Consultar Saldo Devedor");
+		ConsultarSaldoDevedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsultarSaldoDevedor consultarSaldoDevedor = new ConsultarSaldoDevedor();
+				consultarSaldoDevedor.setVisible(true);
+			}
+		});
 
 		JButton ConsultarValorTotal = new JButton("Consultar Valor Total");
+		ConsultarValorTotal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsultarValorTotal consultarValorTotal = new ConsultarValorTotal();
+				consultarValorTotal.setVisible(true);
+			}
+		});
 		GroupLayout gl_ProcessarPagamento = new GroupLayout(ProcessarPagamento);
 		gl_ProcessarPagamento.setHorizontalGroup(
 			gl_ProcessarPagamento.createParallelGroup(Alignment.LEADING)

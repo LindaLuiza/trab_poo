@@ -26,8 +26,9 @@ import exception.HospedeException;
 
 public class CriarCheckIn extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
+
+    private static final long serialVersionUID = -1416237333587722468L;
+	private JPanel contentPane;
     private JTextField txtNumeroAcomodacao;
     private JTextField txtCpfHospede;
 

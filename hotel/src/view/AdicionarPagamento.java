@@ -24,8 +24,8 @@ import exception.PagamentoException;
 
 public class AdicionarPagamento extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
+    private static final long serialVersionUID = -2097534581997088186L;
+	private JPanel contentPane;
     private JComboBox<String> comboBoxIdHospedagem;
     private JTextField txtValorPagamento;
     private JComboBox<String> comboBoxTipoPagamento;

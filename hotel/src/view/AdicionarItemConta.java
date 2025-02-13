@@ -1,11 +1,7 @@
 package view;
 
-import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import controller.HospedagemController;
 import controller.MainController;
 
@@ -18,22 +14,11 @@ public class AdicionarItemConta extends JFrame {
     private JTextField txtQuantidade;
     private HospedagemController hospedagemController;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                AdicionarItemConta frame = new AdicionarItemConta();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
     public AdicionarItemConta() {
     	MainController.load();
         hospedagemController = MainController.getHospedagemController();
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -72,6 +57,7 @@ public class AdicionarItemConta extends JFrame {
         btnAdicionarItem.addActionListener(e -> adicionarItem());
         btnAdicionarItem.setBounds(140, 110, 120, 30);
         contentPane.add(btnAdicionarItem);
+        MainController.save();
     }
 
     private void carregarIdsHospedagem() {
@@ -88,6 +74,10 @@ public class AdicionarItemConta extends JFrame {
 
             hospedagemController.addItemConta(idHospedagem, codigoItem, quantidade);
 
+            System.out.println("Item adicionado -> Hospedagem ID: " + idHospedagem + 
+                               ", Código: " + codigoItem + 
+                               ", Quantidade: " + quantidade);
+
             JOptionPane.showMessageDialog(this, "Item adicionado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 
             txtCodigoItem.setText("");
@@ -98,4 +88,5 @@ public class AdicionarItemConta extends JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao adicionar item: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 }

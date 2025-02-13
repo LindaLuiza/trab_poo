@@ -56,6 +56,12 @@ public class MenuView extends JFrame {
 		});
 		
 		JButton btnAdicionarAcompanhante = new JButton("Adicionar Acompanhante");
+		btnAdicionarAcompanhante.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdicionarAcompanhante adicionarAcompanhante = new AdicionarAcompanhante();
+				adicionarAcompanhante.setVisible(true);
+			}
+		});
 		GroupLayout gl_HospedagensContainer = new GroupLayout(HospedagensContainer);
 		gl_HospedagensContainer.setHorizontalGroup(
 			gl_HospedagensContainer.createParallelGroup(Alignment.LEADING)
@@ -215,28 +221,43 @@ public class MenuView extends JFrame {
 		        listarHospedagem.setVisible(true);
 			}
 		});
+		
+		JButton btnListarItensDa = new JButton("Listar Itens da Conta");
+		btnListarItensDa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarItensConta listarItensConta = new ListarItensConta();
+				listarItensConta.setVisible(true);
+			}
+		});
 		GroupLayout gl_ListarBotoesContainer = new GroupLayout(ListarBotoesContainer);
 		gl_ListarBotoesContainer.setHorizontalGroup(
 			gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
-					.addGap(79)
-					.addComponent(ListarHospede)
-					.addPreferredGap(ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-					.addComponent(ListarItens)
-					.addGap(59))
-				.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
 					.addGroup(gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
-							.addGap(64)
-							.addComponent(ListarAcomodacao))
+							.addGap(79)
+							.addComponent(ListarHospede)
+							.addGap(94)
+							.addComponent(ListarItens))
 						.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
-							.addGap(41)
-							.addComponent(ListarTipoAcomodacao)))
-					.addGap(30)
-					.addGroup(gl_ListarBotoesContainer.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnListarHospedagens)
-						.addComponent(ListarCategorias))
-					.addContainerGap(38, Short.MAX_VALUE))
+							.addGroup(gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+									.addGap(64)
+									.addComponent(ListarAcomodacao))
+								.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+									.addGap(41)
+									.addComponent(ListarTipoAcomodacao)))
+							.addGroup(gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+									.addGap(46)
+									.addComponent(ListarCategorias))
+								.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+									.addGap(38)
+									.addComponent(btnListarHospedagens))))
+						.addGroup(gl_ListarBotoesContainer.createSequentialGroup()
+							.addGap(66)
+							.addComponent(btnListarItensDa)))
+					.addContainerGap(84, Short.MAX_VALUE))
 		);
 		gl_ListarBotoesContainer.setVerticalGroup(
 			gl_ListarBotoesContainer.createParallelGroup(Alignment.LEADING)
@@ -253,7 +274,9 @@ public class MenuView extends JFrame {
 					.addGroup(gl_ListarBotoesContainer.createParallelGroup(Alignment.BASELINE)
 						.addComponent(ListarTipoAcomodacao)
 						.addComponent(btnListarHospedagens))
-					.addContainerGap(62, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnListarItensDa)
+					.addContainerGap(31, Short.MAX_VALUE))
 		);
 		ListarBotoesContainer.setLayout(gl_ListarBotoesContainer);
 
@@ -327,6 +350,12 @@ public class MenuView extends JFrame {
 		});
 		
 		JButton btnAdicionarItemEm_1 = new JButton("Adicionar item em Conta");
+		btnAdicionarItemEm_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AdicionarItemConta adicionarItemConta = new AdicionarItemConta();
+				adicionarItemConta.setVisible(true);
+			}
+		});
 		GroupLayout gl_GerenciarItens = new GroupLayout(GerenciarItens);
 		gl_GerenciarItens.setHorizontalGroup(
 			gl_GerenciarItens.createParallelGroup(Alignment.LEADING)

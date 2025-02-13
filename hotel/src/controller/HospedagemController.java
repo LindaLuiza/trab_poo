@@ -137,41 +137,35 @@ public class HospedagemController implements Serializable {
 
 	}
 	
-	public void listarItensConta(String idHospedagem) {
-	    Hospedagem hospedagem = null;
-
+	public List<ItemConta> listarItensConta(String idHospedagem) {
+	    Hospedagem hospedagem;
+	    
 	    try {
 	        hospedagem = getHospedagemById(idHospedagem);
 	    } catch (HospedagemException e) {
 	        System.out.println("Erro: Hospedagem não encontrada. " + e.getMessage());
-	        return;
+	        return new ArrayList<>();
 	    }
 
 	    Conta conta = hospedagem.getConta();
 
 	    if (conta.getItens().isEmpty()) {
 	        System.out.println("A conta não possui itens registrados.");
-	        return;
+	        return new ArrayList<>();
 	    }
 
-	    System.out.println("Itens da Conta da Hospedagem:");
-	    double totalConta = 0;
-
-	    for (ItemConta itemConta : conta.getItens()) {
-	        double totalItem = itemConta.getQtde() * itemConta.getItem().getPreco();
-	        totalConta += totalItem;
-	        
-	        System.out.printf("  - Código: %d | Descrição: %s | Quantidade: %d | Preço Unitário: R$ %.2f | Total: R$ %.2f%n",
-	            itemConta.getItem().getCodigo(),
-	            itemConta.getItem().getDescricao(),
-	            itemConta.getQtde(),
-	            itemConta.getItem().getPreco(),
-	            totalItem
-	        );
+	    System.out.println("Itens encontrados:");
+	    for (ItemConta item : conta.getItens()) {
+	        System.out.println("Código: " + item.getItem().getCodigo() +
+	                           " | Descrição: " + item.getItem().getDescricao() +
+	                           " | Quantidade: " + item.getQtde() +
+	                           " | Preço Unitário: R$ " + item.getItem().getPreco());
 	    }
 
-	    System.out.printf("Total da Conta: R$ %.2f%n", totalConta);
+	    return conta.getItens();
 	}
+
+
 	
 	public void adicionarAcompanhante(String idHospedagem, HospedeDto acompanhante) {
 	    try {

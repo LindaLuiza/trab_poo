@@ -26,7 +26,7 @@ public class AdicionarAcompanhante extends JFrame {
     private JTextField NomeField;
     private JTextField EmailField;
     private JTextField TelefoneField;
-    
+
     public AdicionarAcompanhante() {
         setTitle("Adicionar Acompanhante");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -46,50 +46,42 @@ public class AdicionarAcompanhante extends JFrame {
         JButton btnAdicionar = new JButton("Adicionar");
         btnAdicionar.setBounds(149, 171, 120, 30);
         contentPane.add(btnAdicionar);
-        
-        JPanel CPF = new JPanel();
-        CPF.setBounds(30, 51, 155, 29);
-        contentPane.add(CPF);
-        
-        JLabel CPFButton = new JLabel("CPF");
-        CPF.add(CPFButton);
-        
+
+        JLabel lblCPF = new JLabel("CPF:");
+        lblCPF.setBounds(30, 50, 120, 20);
+        contentPane.add(lblCPF);
+
         CPFField = new JTextField();
+        CPFField.setBounds(149, 50, 200, 20);
+        contentPane.add(CPFField);
         CPFField.setColumns(10);
-        CPF.add(CPFField);
-        
-        JPanel Nome = new JPanel();
-        Nome.setBounds(250, 51, 169, 29);
-        contentPane.add(Nome);
-        
-        JLabel NomeButton = new JLabel("Nome");
-        Nome.add(NomeButton);
-        
+
+        JLabel lblNome = new JLabel("Nome:");
+        lblNome.setBounds(30, 80, 120, 20);
+        contentPane.add(lblNome);
+
         NomeField = new JTextField();
+        NomeField.setBounds(149, 80, 200, 20);
+        contentPane.add(NomeField);
         NomeField.setColumns(10);
-        Nome.add(NomeField);
-        
-        JPanel Email = new JPanel();
-        Email.setBounds(30, 104, 166, 29);
-        contentPane.add(Email);
-        
-        JLabel EmailButton = new JLabel("Email");
-        Email.add(EmailButton);
-        
+
+        JLabel lblEmail = new JLabel("Email:");
+        lblEmail.setBounds(30, 110, 120, 20);
+        contentPane.add(lblEmail);
+
         EmailField = new JTextField();
+        EmailField.setBounds(149, 110, 200, 20);
+        contentPane.add(EmailField);
         EmailField.setColumns(10);
-        Email.add(EmailField);
-        
-        JPanel Telefone = new JPanel();
-        Telefone.setBounds(219, 104, 200, 29);
-        contentPane.add(Telefone);
-        
-        JLabel TelefoneButton = new JLabel("Telefone");
-        Telefone.add(TelefoneButton);
-        
+
+        JLabel lblTelefone = new JLabel("Telefone:");
+        lblTelefone.setBounds(30, 140, 120, 20);
+        contentPane.add(lblTelefone);
+
         TelefoneField = new JTextField();
+        TelefoneField.setBounds(149, 140, 200, 20);
+        contentPane.add(TelefoneField);
         TelefoneField.setColumns(10);
-        Telefone.add(TelefoneField);
 
         carregarIdsHospedagem();
 
@@ -106,30 +98,38 @@ public class AdicionarAcompanhante extends JFrame {
         List<HospedagemDto> hospedagens = hospedagemController.getHospedagens();
 
         for (HospedagemDto hospedagem : hospedagens) {
-            comboBoxIdHospedagem.addItem(hospedagem.getId().toString());
+            comboBoxIdHospedagem.addItem(hospedagem.getId());
         }
     }
 
     private void adicionarAcompanhante() {
         String hospedagemId = (String) comboBoxIdHospedagem.getSelectedItem();
         String cpf = CPFField.getText();
-		String nome = NomeField.getText();
-		String email = EmailField.getText();
-		long telefone = Long.parseLong(TelefoneField.getText());
+        String nome = NomeField.getText();
+        String email = EmailField.getText();
+        String telefone = TelefoneField.getText();
 
-        if (hospedagemId == null || cpf.isEmpty()) {
+        if (hospedagemId == null || cpf.isEmpty() || nome.isEmpty() || email.isEmpty() || telefone.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        HospedagemController hospedagemController = MainController.getHospedagemController();
-        boolean sucesso = hospedagemController.adicionarAcompanhante(hospedagemId, new HospedeDto(cpf, nome, email, telefone));
+        try {
+            HospedeDto acompanhante = new HospedeDto(cpf, nome, email, Long.parseLong(telefone));
 
-        if (sucesso) {
-            JOptionPane.showMessageDialog(this, "Acompanhante adicionado com sucesso!");
-            cpf.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "Erro ao adicionar acompanhante!", "Erro", JOptionPane.ERROR_MESSAGE);
+            HospedagemController hospedagemController = MainController.getHospedagemController();
+            hospedagemController.adicionarAcompanhante(hospedagemId, acompanhante);
+
+            JOptionPane.showMessageDialog(this, "Acompanhante adicionado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+
+            CPFField.setText("");
+            NomeField.setText("");
+            EmailField.setText("");
+            TelefoneField.setText("");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Telefone deve ser um número válido!", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao adicionar acompanhante: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
